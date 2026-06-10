@@ -72,7 +72,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="border-t border-line bg-band-alt py-[104px]"
+      className="sec-pad border-t border-line bg-band-alt"
     >
       <div className="wrap">
         <SectionHeader

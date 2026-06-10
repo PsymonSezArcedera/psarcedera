@@ -40,7 +40,7 @@ export function Navbar() {
         "rounded-full py-2.5 pl-5 pr-3 backdrop-blur-md backdrop-saturate-150",
         "shadow-[0_14px_36px_-20px_rgba(0,0,0,0.45)] transition-[background-color,color] duration-500",
         dark ? "bg-[rgba(13,13,16,0.88)]" : "bg-[rgba(255,255,255,0.82)]",
-        "max-[820px]:left-3.5 max-[820px]:right-3.5 max-[820px]:pl-4 max-[820px]:pr-2.5"
+        "max-[820px]:left-1/2 max-[820px]:right-auto max-[820px]:-translate-x-1/2 max-[820px]:max-w-[calc(100vw-24px)] max-[820px]:justify-start max-[820px]:gap-3 max-[820px]:py-2 max-[820px]:pl-4 max-[820px]:pr-1.5"
       )}
     >
       <Link

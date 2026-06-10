@@ -77,6 +77,10 @@
       padding-inline: 22px;
     }
   }
+
+  .sec-pad {
+    padding-block: clamp(60px, 10vw, 104px);
+  }
 }
 
 @keyframes ping-dot {

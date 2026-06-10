@@ -10,7 +10,7 @@ const META = [
 
 export function About() {
   return (
-    <section id="about" className="py-[104px]">
+    <section id="about" className="sec-pad">
       <div className="wrap">
         <SectionHeader title="About" />
         <div className="grid grid-cols-[0.8fr_1.2fr] gap-14 max-[860px]:grid-cols-1 max-[860px]:gap-9">
@@ -38,7 +38,7 @@ export function About() {
               Department of Science and Technology — integrating LLMs, pose
               detection, and full-stack web systems along the way.
             </p>
-            <div className="mt-[34px] grid grid-cols-2 gap-x-[26px] gap-y-6 border-t border-line pt-[26px]">
+            <div className="mt-[34px] grid grid-cols-2 gap-x-[26px] gap-y-6 border-t border-line pt-[26px] max-[480px]:grid-cols-1 max-[480px]:gap-y-5">
               {META.map((m) => (
                 <div key={m.k}>
                   <div className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-2">

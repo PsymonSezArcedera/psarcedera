@@ -27,7 +27,7 @@ export function Awards() {
   return (
     <section
       id="awards"
-      className="border-t border-line py-[104px]"
+      className="sec-pad border-t border-line"
     >
       <div className="wrap">
         <SectionHeader title="Awards" note="Recognition along the way." />

@@ -36,7 +36,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="border-t border-line bg-band-alt py-[104px]"
+      className="sec-pad border-t border-line bg-band-alt"
     >
       <div className="wrap">
         <SectionHeader

@@ -151,12 +151,12 @@ export function Hero() {
   return (
     <header
       id="top"
-      className="bg-hero pb-24 pt-[152px] text-white"
+      className="bg-hero pt-[clamp(110px,15vw,152px)] pb-[clamp(60px,10vw,96px)] text-white"
     >
       <div className="mx-auto max-w-460 px-14 max-[1024px]:px-10 max-[680px]:px-5">
-        <div className="mt-[46px] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-10">
+        <div className="mt-[clamp(28px,4vw,46px)] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-10">
           <div>
-            <h1 className="text-[clamp(60px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
+            <h1 className="text-[clamp(54px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
               <Typewriter
                 lines={[
                   { text: "Psymon Sez" },
@@ -164,14 +164,14 @@ export function Hero() {
                 ]}
               />
             </h1>
-            <p className="mt-[34px] max-w-[440px] text-[17px] leading-[1.6] text-[#a9a9b0]">
+            <p className="mt-[clamp(20px,3.5vw,34px)] max-w-[440px] text-[clamp(15px,1.6vw,17px)] leading-[1.6] text-[#a9a9b0]">
               A full-stack developer building AI-powered products and
               enterprise systems — CS student at UP Los Baños and DOST-SEI
               Merit Scholar, with production experience across startup and
               government teams.
             </p>
           </div>
-          <div>
+          <div className="mx-auto w-full max-[920px]:max-w-[420px]">
             <Logo3D />
           </div>
         </div>

@@ -214,7 +214,7 @@ export function Projects() {
   }, [go]);
 
   return (
-    <section id="work" className="border-t border-line bg-band-alt py-[104px]">
+    <section id="work" className="sec-pad border-t border-line bg-band-alt">
       <div className="wrap">
         <SectionHeader
           title="Selected Work"
@@ -223,7 +223,7 @@ export function Projects() {
         <Reveal className="mt-[42px]">
           <div
             ref={stageRef}
-            className="relative h-[560px] max-[680px]:h-[520px]"
+            className="relative h-[560px] max-[680px]:h-[520px] max-[420px]:h-120"
             aria-roledescription="carousel"
           >
             {PROJECTS.map((p, i) => (

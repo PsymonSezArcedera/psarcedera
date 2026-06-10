@@ -67,7 +67,7 @@ function DownloadIcon() {
 
 export function Contact() {
   return (
-    <section id="contact" className="border-t border-line bg-band-alt pb-10 pt-[110px]">
+    <section id="contact" className="border-t border-line bg-band-alt pb-[clamp(36px,5vw,56px)] pt-[clamp(64px,11vw,110px)]">
       <div className="wrap">
         <SectionHeader title="Contact" />
 
