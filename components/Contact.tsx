@@ -92,8 +92,8 @@ export function Contact() {
             </p>
           </Reveal>
 
-          <Reveal>
-            <div className="group/grid flex max-w-[430px] items-center justify-center gap-10 max-[860px]:gap-7">
+          <Reveal className="max-[860px]:contents">
+            <div className="group/grid ml-auto flex max-w-[430px] items-center justify-center gap-10 max-[860px]:ml-0 max-[860px]:gap-7">
               <Link
                 href={`mailto:${EMAIL}`}
                 aria-label="Email"
@@ -127,7 +127,7 @@ export function Contact() {
             <Link
               href="/Psymon-Arcedera-Resume.pdf"
               download
-              className="group/btn relative mt-10 flex max-w-[430px] items-center justify-between gap-4 overflow-hidden rounded-[20px] border border-ink bg-ink p-5 pl-6 text-white transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1"
+              className="group/btn relative ml-auto mt-10 flex max-w-[430px] items-center justify-between gap-4 overflow-hidden rounded-[20px] border border-ink bg-ink p-5 pl-6 text-white transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 max-[860px]:ml-0"
             >
               <span
                 className="pointer-events-none absolute left-[-60%] top-0 z-[1] h-full w-[50%] -skew-x-[18deg] bg-gradient-to-r from-transparent via-white/15 to-transparent group-hover/btn:animate-[sheen_1.1s_ease_forwards]"
