@@ -1,5 +1,6 @@
 import { About } from "@/components/About";
 import { Awards } from "@/components/Awards";
+import { Contact } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
@@ -17,6 +18,7 @@ export default function Home() {
         <Awards />
         <Projects />
         <Skills />
+        <Contact />
       </main>
     </>
   );
