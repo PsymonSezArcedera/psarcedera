@@ -45,13 +45,11 @@ export function Navbar() {
     >
       <Link
         href="#top"
-        className={cn(
-          "flex items-center gap-2 text-base font-semibold tracking-[-0.02em] transition-colors duration-450",
-          dark ? "text-white" : "text-ink"
-        )}
+        style={{ color: dark ? "#ffffff" : "#0d0d10" }}
+        className="flex items-center gap-2 text-base font-bold tracking-[-0.02em] transition-colors duration-500"
       >
         <span
-          className="rounded-[9px] border border-dashed border-current px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] opacity-60"
+          className="rounded-[9px] border border-dashed border-current px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] opacity-80"
         >
           PSA
         </span>
@@ -62,18 +60,13 @@ export function Navbar() {
           <Link
             key={link.href}
             href={link.href}
-            className={cn(
-              "group relative py-0.5 text-[14px] font-semibold transition-colors duration-200",
-              dark ? "text-white hover:text-white" : "text-ink hover:text-ink"
-            )}
+            style={{ color: dark ? "#ffffff" : "#0d0d10" }}
+            className="group relative py-0.5 text-[14px] font-bold transition-colors duration-200"
           >
             {link.label}
             <span
-              className={cn(
-                "absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                "group-hover:origin-left group-hover:scale-x-100",
-                dark ? "bg-white" : "bg-ink"
-              )}
+              style={{ backgroundColor: dark ? "#ffffff" : "#0d0d10" }}
+              className="absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100"
             />
           </Link>
         ))}
@@ -81,10 +74,11 @@ export function Navbar() {
 
       <Link
         href="#contact"
-        className={cn(
-          "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-semibold transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
-          dark ? "bg-white text-ink" : "bg-ink text-white"
-        )}
+        style={{
+          backgroundColor: dark ? "#ffffff" : "#0d0d10",
+          color: dark ? "#0d0d10" : "#ffffff",
+        }}
+        className="group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-bold transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90"
       >
         Get in touch
         <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
