@@ -76,12 +76,12 @@ export function Contact() {
             <div className="text-[clamp(40px,7vw,96px)] font-semibold leading-[0.96] tracking-[-0.04em]">
               <Link
                 href={`mailto:${EMAIL}`}
-                className="group inline-block transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-3.5"
+                className="group inline-block transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-3.5"
               >
                 Let&apos;s work
                 <br />
                 together{" "}
-                <span className="inline-block transition-transform duration-[400ms] group-hover:translate-x-2.5 group-hover:-translate-y-2.5">
+                <span className="inline-block transition-transform duration-400 group-hover:translate-x-2.5 group-hover:-translate-y-2.5">
                   ↗
                 </span>
               </Link>
@@ -93,7 +93,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal className="max-[860px]:contents">
-            <div className="group/grid ml-auto flex max-w-[430px] items-center justify-center gap-10 max-[860px]:ml-0 max-[860px]:gap-7">
+            <div className="group/grid ml-auto flex max-w-107.5 items-center justify-center gap-10 max-[860px]:ml-0 max-[860px]:gap-7">
               <Link
                 href={`mailto:${EMAIL}`}
                 aria-label="Email"
@@ -127,7 +127,7 @@ export function Contact() {
             <Link
               href="/Psymon-Arcedera-Resume.pdf"
               download
-              className="group/btn relative ml-auto mt-10 flex max-w-[430px] items-center justify-between gap-4 overflow-hidden rounded-[20px] border border-ink bg-ink p-5 pl-6 text-white transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 max-[860px]:ml-0"
+              className="group/btn relative ml-auto mt-10 flex max-w-107.5 items-center justify-between gap-4 overflow-hidden rounded-[20px] border border-ink bg-ink p-5 pl-6 text-white transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 max-[860px]:ml-0"
             >
               <span
                 className="pointer-events-none absolute left-[-60%] top-0 z-[1] h-full w-[50%] -skew-x-[18deg] bg-gradient-to-r from-transparent via-white/15 to-transparent group-hover/btn:animate-[sheen_1.1s_ease_forwards]"
