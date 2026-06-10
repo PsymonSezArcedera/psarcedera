@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { cn } from "@/lib/utils";
 
 type Job = {
-  logo: { src: string; alt: string };
+  logo: { src: string; alt: string; pad?: string; tileBg?: string };
   role: string;
   company: string;
   date: string;
@@ -15,7 +15,12 @@ type Job = {
 
 const JOBS: Job[] = [
   {
-    logo: { src: "/ten-x.png", alt: "Ten X Development logo" },
+    logo: {
+      src: "/ten-x.png",
+      alt: "Ten X Development logo",
+      pad: "p-0",
+      tileBg: "bg-hero",
+    },
     role: "AI Software Developer Intern",
     company: "Ten X Development",
     date: "Sep 2025 — May 2026",
@@ -48,13 +53,18 @@ export function Experience() {
           {JOBS.map((job) => (
             <Reveal key={job.company}>
               <article className="group grid grid-cols-[auto_1fr] items-start gap-[30px] rounded-[22px] border border-line-2 bg-white p-7 transition-[transform,box-shadow,border-color] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[#c4c4ca] hover:shadow-[0_30px_60px_-36px_rgba(0,0,0,0.3)] max-[680px]:grid-cols-1 max-[680px]:gap-[18px] max-[680px]:p-6">
-                <div className="relative flex h-18.5 w-18.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-line-2 bg-white">
+                <div
+                  className={cn(
+                    "relative flex h-18.5 w-18.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-line-2",
+                    job.logo.tileBg ?? "bg-white"
+                  )}
+                >
                   <Image
                     src={job.logo.src}
                     alt={job.logo.alt}
                     fill
                     sizes="74px"
-                    className="object-contain p-2"
+                    className={cn("object-contain", job.logo.pad ?? "p-2")}
                   />
                 </div>
                 <div className="exp-main">
