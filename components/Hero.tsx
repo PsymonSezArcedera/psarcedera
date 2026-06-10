@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { SplitText } from "@/components/SplitText";
+import { Typewriter } from "@/components/SplitText";
 
 function Logo3D() {
   const frameRef = useRef<HTMLDivElement>(null);
@@ -157,16 +157,11 @@ export function Hero() {
         <div className="mt-[46px] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-10">
           <div>
             <h1 className="text-[clamp(60px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
-              <SplitText
-                text="Psymon Sez"
-                className="block"
-                charDelayMs={95}
-              />
-              <SplitText
-                text="Arcedera"
-                className="block text-hero-dim"
-                delay={1.4}
-                charDelayMs={95}
+              <Typewriter
+                lines={[
+                  { text: "Psymon Sez" },
+                  { text: "Arcedera", className: "text-hero-dim" },
+                ]}
               />
             </h1>
             <p className="mt-[34px] max-w-[440px] text-[17px] leading-[1.6] text-[#a9a9b0]">

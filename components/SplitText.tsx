@@ -3,61 +3,99 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-export function SplitText({
-  text,
-  className,
-  delay = 0,
-  charDelayMs = 90,
-  showCursor = true,
-}: {
+type Line = {
   text: string;
   className?: string;
-  delay?: number;
+};
+
+export function Typewriter({
+  lines,
+  charDelayMs = 95,
+  pauseBetweenLinesMs = 700,
+  startDelayMs = 300,
+  cursorFadeDelayMs = 900,
+}: {
+  lines: Line[];
   charDelayMs?: number;
-  showCursor?: boolean;
+  pauseBetweenLinesMs?: number;
+  startDelayMs?: number;
+  cursorFadeDelayMs?: number;
 }) {
+  const [lineIdx, setLineIdx] = useState(0);
   const [shown, setShown] = useState(0);
-  const [done, setDone] = useState(false);
+  const [started, setStarted] = useState(false);
+  const [allDone, setAllDone] = useState(false);
 
   useEffect(() => {
-    setShown(0);
-    setDone(false);
-    let interval: ReturnType<typeof setInterval> | null = null;
-    const start = setTimeout(() => {
-      let i = 0;
-      interval = setInterval(() => {
-        i += 1;
-        setShown(i);
-        if (i >= text.length && interval) {
-          clearInterval(interval);
-          setDone(true);
-        }
-      }, charDelayMs);
-    }, delay * 1000);
+    const t = setTimeout(() => setStarted(true), startDelayMs);
+    return () => clearTimeout(t);
+  }, [startDelayMs]);
 
-    return () => {
-      clearTimeout(start);
-      if (interval) clearInterval(interval);
-    };
-  }, [text, delay, charDelayMs]);
+  useEffect(() => {
+    if (!started || allDone) return;
+    const current = lines[lineIdx];
+    if (!current) return;
+
+    if (shown < current.text.length) {
+      const t = setTimeout(() => setShown((s) => s + 1), charDelayMs);
+      return () => clearTimeout(t);
+    }
+
+    if (lineIdx < lines.length - 1) {
+      const t = setTimeout(() => {
+        setLineIdx((i) => i + 1);
+        setShown(0);
+      }, pauseBetweenLinesMs);
+      return () => clearTimeout(t);
+    }
+
+    const t = setTimeout(() => setAllDone(true), cursorFadeDelayMs);
+    return () => clearTimeout(t);
+  }, [
+    shown,
+    lineIdx,
+    lines,
+    started,
+    allDone,
+    charDelayMs,
+    pauseBetweenLinesMs,
+    cursorFadeDelayMs,
+  ]);
 
   return (
-    <span className={className} aria-label={text}>
-      <span aria-hidden>{text.slice(0, shown)}</span>
-      {showCursor && (
-        <motion.span
-          aria-hidden
-          className="inline-block"
-          animate={done ? { opacity: 0 } : { opacity: [1, 0, 1] }}
-          transition={
-            done
-              ? { duration: 0.5, ease: "easeOut", delay: 0.4 }
-              : { duration: 0.8, repeat: Infinity, ease: "linear" }
-          }
-        >
-          |
-        </motion.span>
-      )}
-    </span>
+    <>
+      {lines.map((line, i) => {
+        const isCurrent = i === lineIdx;
+        const isPast = i < lineIdx;
+        const visible = isPast
+          ? line.text
+          : isCurrent
+            ? line.text.slice(0, shown)
+            : "";
+        return (
+          <span
+            key={i}
+            className={`block ${line.className ?? ""}`}
+            aria-label={line.text}
+          >
+            <span aria-hidden>{visible}</span>
+            {isCurrent && started && (
+              <motion.span
+                aria-hidden
+                className="inline-block"
+                animate={allDone ? { opacity: 0 } : { opacity: [1, 0, 1] }}
+                transition={
+                  allDone
+                    ? { duration: 0.5, ease: "easeOut" }
+                    : { duration: 0.8, repeat: Infinity, ease: "linear" }
+                }
+              >
+                |
+              </motion.span>
+            )}
+          </span>
+        );
+      })}
+    </>
   );
 }
