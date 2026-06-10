@@ -166,7 +166,7 @@ export function Hero() {
             </h1>
             <p className="mt-[clamp(20px,3.5vw,34px)] max-w-[440px] text-[clamp(15px,1.6vw,17px)] leading-[1.6] text-[#a9a9b0]">
               A full-stack developer building AI-powered products and
-              enterprise systems — CS student at UP Los Baños and DOST-SEI
+              enterprise systems. CS student at UP Los Baños and DOST-SEI
               Merit Scholar, with production experience across startup and
               government teams.
             </p>

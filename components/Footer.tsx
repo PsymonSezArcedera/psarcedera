@@ -46,7 +46,7 @@ function Flashlight() {
   return (
     <div ref={wrapRef} className="wrap flash-wrap relative pb-7 pt-1.5">
       <div className="mb-1.5 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-hero-dim opacity-70">
-        — move your cursor —
+        move your cursor
       </div>
       <div className="relative">
         <span className="block select-none text-center text-[clamp(64px,21vw,310px)] font-bold uppercase leading-[0.86] tracking-[-0.045em] text-white/[0.05]">
@@ -82,7 +82,7 @@ export function Footer() {
             {EMAIL}
           </Link>
           <p className="mt-[18px] max-w-[340px] text-[15px] leading-[1.55] text-[#a4a4ac]">
-            Open to full-time and internship software roles — remote, or around
+            Open to full-time and internship software roles, remote, or around
             Laguna & Metro Manila. Let&apos;s build something good.
           </p>
         </div>

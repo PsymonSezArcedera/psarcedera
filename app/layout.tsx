@@ -16,12 +16,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Psymon Sez Arcedera — Full-Stack Developer",
+  title: "Psymon Sez Arcedera, Full-Stack Developer",
   description:
     "Full-stack developer building AI-powered products and enterprise systems. CS student at UP Los Baños and DOST-SEI Merit Scholar.",
   metadataBase: new URL("https://psymonsezarcedera.vercel.app"),
   openGraph: {
-    title: "Psymon Sez Arcedera — Full-Stack Developer",
+    title: "Psymon Sez Arcedera, Full-Stack Developer",
     description:
       "Full-stack developer building AI-powered products and enterprise systems.",
     type: "website",

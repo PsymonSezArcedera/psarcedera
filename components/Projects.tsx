@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
     category: "Mobile App · Planned",
     title: "ParaLink",
     description:
-      "Real-time routes and trip coordination for jeepney drivers and commuters across the San Pablo transport network — a mobile-first take on local transit.",
+      "Real-time routes and trip coordination for jeepney drivers and commuters across the San Pablo transport network. A mobile-first take on local transit.",
     badges: ["React Native", "Mobile", "Maps"],
     planned: true,
     gradient: "linear-gradient(135deg, #8a8e96 0%, #a8acb2 50%, #c4c6cc 100%)",

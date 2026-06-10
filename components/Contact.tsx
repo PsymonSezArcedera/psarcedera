@@ -88,7 +88,7 @@ export function Contact() {
             </div>
             <p className="mt-[22px] max-w-[380px] text-[16px] text-ink-2">
               Open to full-time and internship software roles. The fastest way
-              to reach me is email — or pick a channel.
+              to reach me is email, or pick a channel.
             </p>
           </Reveal>
 

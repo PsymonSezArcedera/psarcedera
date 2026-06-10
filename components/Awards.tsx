@@ -14,14 +14,14 @@ type Award = {
 
 const AWARDS: Award[] = [
   {
-    title: "Honor Society of the Philippines — Nominee",
+    title: "Honor Society of the Philippines, Nominee",
     org: "University of the Philippines Los Baños",
     year: "2026",
     desc: "Nominated for outstanding academic performance, ranking within the top 10% of the batch.",
   },
   {
     title: "DOST-SEI Merit Scholar",
-    org: "Department of Science and Technology — SEI",
+    org: "Department of Science and Technology, SEI",
     year: "2022",
     desc: "Merit-based undergraduate scholarship for excellence in science and engineering.",
   },
@@ -102,7 +102,7 @@ export function Awards() {
       <div className="wrap">
         <SectionHeader
           title="Recognition along the way"
-          note="Academic distinctions earned alongside the engineering work — hover a year to see it scramble in."
+          note="Academic distinctions earned alongside the engineering work. Hover a year to see it scramble in."
         />
         <div className="mt-11 grid grid-cols-2 gap-5 max-[760px]:grid-cols-1">
           {AWARDS.map((a) => (
