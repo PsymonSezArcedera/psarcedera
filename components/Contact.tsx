@@ -93,7 +93,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal>
-            <div className="group/grid flex max-w-[430px] items-center justify-between gap-7">
+            <div className="group/grid flex max-w-[430px] items-center justify-center gap-10 max-[860px]:gap-7">
               <Link
                 href={`mailto:${EMAIL}`}
                 aria-label="Email"
