@@ -43,7 +43,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="sec-pad border-t border-line bg-band-alt"
+      className="sec-pad bg-band-alt"
     >
       <div className="wrap">
         <SectionHeader

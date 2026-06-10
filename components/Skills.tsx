@@ -128,7 +128,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="sec-pad border-t border-line bg-band-alt"
+      className="sec-pad"
     >
       <div className="wrap">
         <SectionHeader

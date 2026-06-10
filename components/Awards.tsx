@@ -98,7 +98,7 @@ function AwardTile({ award }: { award: Award }) {
 
 export function Awards() {
   return (
-    <section id="awards" className="sec-pad border-t border-line">
+    <section id="awards" className="sec-pad">
       <div className="wrap">
         <SectionHeader
           title="Recognition along the way"
