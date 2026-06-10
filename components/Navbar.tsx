@@ -36,7 +36,7 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-4 left-6 right-6 z-100 mx-auto flex max-w-[1300px] items-center justify-between gap-5",
+        "fixed top-4 left-6 right-6 z-100 mx-auto flex max-w-325 items-center justify-between gap-5",
         "rounded-full py-2.5 pl-5 pr-3 backdrop-blur-md backdrop-saturate-150",
         "shadow-[0_14px_36px_-20px_rgba(0,0,0,0.45)] transition-[background-color,color] duration-500",
         dark ? "bg-[rgba(13,13,16,0.88)]" : "bg-[rgba(255,255,255,0.82)]",
