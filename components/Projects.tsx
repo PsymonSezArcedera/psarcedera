@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { TileMark } from "@/components/TileMark";
 
 type Project = {
   category: string;
@@ -10,7 +11,8 @@ type Project = {
   description: string;
   badges: string[];
   planned?: boolean;
-  href?: string;
+  gradient: string;
+  glow: string;
 };
 
 const PROJECTS: Project[] = [
@@ -20,259 +22,134 @@ const PROJECTS: Project[] = [
     description:
       "Session-based authentication and role-based access control for an alumni network spanning multiple graduation batches, plus optimized search and filtering over indexed database fields for fast retrieval on large record sets.",
     badges: ["PostgreSQL", "Next.js", "React", "Express"],
+    gradient: "linear-gradient(135deg, #1a1a1f 0%, #2b2b33 45%, #3a3a44 100%)",
+    glow: "rgba(255,255,255,0.18)",
   },
   {
     category: "Mobile App · Planned",
     title: "ParaLink",
     description:
-      "A mobile application for jeepney drivers in San Pablo City — connecting drivers and commuters with real-time routes and trip coordination across the local transport network.",
+      "Real-time routes and trip coordination for jeepney drivers and commuters across the San Pablo transport network — a mobile-first take on local transit.",
     badges: ["React Native", "Mobile", "Maps"],
     planned: true,
+    gradient: "linear-gradient(135deg, #8a8e96 0%, #a8acb2 50%, #c4c6cc 100%)",
+    glow: "rgba(255,255,255,0.22)",
   },
   {
     category: "Research · SSRN · 2024",
     title: "Modeling Merit",
     description:
-      "An end-to-end Naïve Bayes classification pipeline estimating scholarship eligibility from student attributes. Published on SSRN.",
+      "End-to-end Naïve Bayes classification pipeline estimating scholarship eligibility from student attributes. Published on SSRN.",
     badges: ["Python", "Naïve Bayes", "Research"],
+    gradient: "linear-gradient(135deg, #d4d4d9 0%, #e6e6ea 50%, #f0f0f3 100%)",
+    glow: "rgba(13,13,16,0.08)",
   },
 ];
 
-function ProjectCard({
-  project,
-  isActive,
-  onClick,
-}: {
-  project: Project;
-  isActive: boolean;
-  onClick: () => void;
-}) {
+function ProjectTile({ project }: { project: Project }) {
+  const ref = useRef<HTMLElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0, mx: 50, my: 50 });
+
+  const onMove = (e: React.MouseEvent) => {
+    const r = ref.current?.getBoundingClientRect();
+    if (!r) return;
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({
+      x: py * -3,
+      y: px * 3,
+      mx: ((e.clientX - r.left) / r.width) * 100,
+      my: ((e.clientY - r.top) / r.height) * 100,
+    });
+  };
+
+  const onLeave = () => setTilt({ x: 0, y: 0, mx: 50, my: 50 });
+
   return (
-    <div
-      onClick={onClick}
-      className="cursor-pointer"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onClick();
-        }
+    <article
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="tile group relative grid grid-cols-[1fr_1.1fr] overflow-hidden transition-transform duration-300 ease-out max-[820px]:grid-cols-1"
+      style={{
+        transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transformStyle: "preserve-3d",
       }}
     >
       <div
-        className={`overflow-hidden rounded-[30px] border border-line-2 bg-white transition-shadow duration-[600ms] ${
-          isActive
-            ? "shadow-[0_44px_84px_-36px_rgba(0,0,0,0.42)]"
-            : "shadow-[0_18px_42px_-26px_rgba(0,0,0,0.22)]"
-        }`}
+        className="relative min-h-[280px] overflow-hidden max-[820px]:aspect-[16/10] max-[820px]:min-h-0"
+        style={{ background: project.gradient }}
       >
         <div
-          className="relative aspect-[5/4] border-b border-line-2 bg-surface"
+          aria-hidden
+          className="absolute inset-0 transition-opacity duration-500"
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, transparent 0 15px, rgba(0,0,0,0.045) 15px 16px)",
+            background: `radial-gradient(circle 300px at ${tilt.mx}% ${tilt.my}%, ${project.glow}, transparent 70%)`,
+          }}
+        />
+        <span
+          aria-hidden
+          className="absolute inset-0 flex select-none items-center justify-center text-[clamp(140px,18vw,260px)] font-bold leading-none tracking-[-0.06em] text-white/10 transition-transform duration-700 group-hover:scale-105"
+          style={{
+            color:
+              project.glow === "rgba(13,13,16,0.08)"
+                ? "rgba(13,13,16,0.12)"
+                : "rgba(255,255,255,0.12)",
           }}
         >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="rounded bg-bg px-3 py-1 font-mono text-[11.5px] tracking-[0.04em] text-ink-2">
-              {project.title}
-            </span>
-          </div>
-          {project.planned && (
-            <span className="absolute left-4 top-4 rounded-full border border-line bg-bg px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.06em] text-ink-2">
-              Planned
-            </span>
-          )}
-        </div>
-        <div className="px-6 pb-7 pt-6 text-center">
-          <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-2">
-            {project.category}
-          </div>
-          <h3 className="mb-3 text-[25px] font-semibold tracking-[-0.02em]">
+          {project.title.charAt(0)}
+        </span>
+        {project.planned && (
+          <span className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/30 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-white/90 backdrop-blur-md">
+            Planned
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-col justify-between p-8 max-[820px]:p-7 max-[680px]:p-6">
+        <div>
+          <span className="tile-meta">{project.category}</span>
+          <h3 className="mt-3 text-[clamp(26px,3.4vw,40px)] font-semibold leading-[1.05] tracking-[-0.025em]">
             {project.title}
           </h3>
-          <p className="mx-auto mb-[18px] max-w-[320px] text-[14.5px] leading-[1.55] text-ink-2">
+          <p className="mt-5 text-[16px] leading-[1.65] text-ink-2">
             {project.description}
           </p>
-          <div className="flex flex-wrap justify-center gap-[7px]">
+        </div>
+        <div className="mt-8">
+          <div className="flex flex-wrap gap-2">
             {project.badges.map((b) => (
               <span
                 key={b}
-                className="rounded-full border border-line bg-bg px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.04em] text-ink"
+                className="rounded-full border border-line px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.04em] text-ink-2 transition-colors duration-300 group-hover:border-ink group-hover:text-ink"
               >
                 {b}
               </span>
             ))}
           </div>
+          <TileMark className="mt-6 h-3.5 w-3.5 self-end text-ink-2 transition-[color,transform] duration-500 group-hover:rotate-45 group-hover:text-ink" />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 export function Projects() {
-  const [active, setActive] = useState(0);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const N = PROJECTS.length;
-
-  const rel = useCallback(
-    (i: number) => {
-      let o = (i - active) % N;
-      if (o < 0) o += N;
-      if (o > N / 2) o -= N;
-      return o;
-    },
-    [active, N]
-  );
-
-  const layout = useCallback(() => {
-    cardRefs.current.forEach((c, i) => {
-      if (!c) return;
-      const w = c.offsetWidth || 360;
-      const o = rel(i);
-      let x = 0;
-      let y = 0;
-      let s = 1;
-      let z = 30;
-      let op = 1;
-      if (o === 0) {
-        x = 0;
-        y = 0;
-        s = 1;
-        z = 30;
-        op = 1;
-      } else if (o === 1) {
-        x = w * 0.66;
-        y = 46;
-        s = 0.8;
-        z = 20;
-        op = 1;
-      } else if (o === -1) {
-        x = -w * 0.66;
-        y = 46;
-        s = 0.8;
-        z = 20;
-        op = 1;
-      } else {
-        x = (o > 0 ? 1 : -1) * w * 1.15;
-        y = 70;
-        s = 0.6;
-        z = 5;
-        op = 0;
-      }
-      c.style.transform = `translate(calc(-50% + ${x}px), ${y}px) scale(${s})`;
-      c.style.zIndex = String(z);
-      c.style.opacity = String(op);
-      c.style.pointerEvents = op > 0 ? "auto" : "none";
-    });
-  }, [rel]);
-
-  const go = useCallback(
-    (d: number) => setActive((a) => (a + d + N) % N),
-    [N]
-  );
-
-  useEffect(() => {
-    layout();
-    const onResize = () => layout();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [layout]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") go(-1);
-      if (e.key === "ArrowRight") go(1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [go]);
-
-  useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    let sx: number | null = null;
-    let dragging = false;
-    const onDown = (e: PointerEvent) => {
-      sx = e.clientX;
-      dragging = true;
-    };
-    const onUp = (e: PointerEvent) => {
-      if (!dragging || sx === null) return;
-      dragging = false;
-      const dx = e.clientX - sx;
-      if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
-    };
-    stage.addEventListener("pointerdown", onDown);
-    window.addEventListener("pointerup", onUp);
-    return () => {
-      stage.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointerup", onUp);
-    };
-  }, [go]);
-
   return (
-    <section
-      id="work"
-      className="sec-pad relative overflow-x-hidden border-t border-line bg-band-alt"
-    >
+    <section id="work" className="sec-pad border-t border-line bg-band-alt">
       <div className="wrap">
         <SectionHeader
-          title="Selected Work"
-          note="Browse the projects — drag, use the arrows, click a side card, or use ← →. It loops."
+          title="Selected work"
+          note="Three projects, each given its own room. Tilt the tiles with your cursor."
         />
-        <Reveal className="mt-[42px]">
-          <div
-            ref={stageRef}
-            className="relative h-[560px] max-[680px]:h-[520px] max-[420px]:h-120"
-            aria-roledescription="carousel"
-          >
-            {PROJECTS.map((p, i) => (
-              <article
-                key={p.title}
-                ref={(el) => {
-                  cardRefs.current[i] = el;
-                }}
-                className="absolute left-1/2 top-0 w-[clamp(290px,76vw,400px)] transition-[transform,opacity] duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-                style={{ willChange: "transform" }}
-              >
-                <ProjectCard
-                  project={p}
-                  isActive={rel(i) === 0}
-                  onClick={() => {
-                    if (rel(i) !== 0) setActive(i);
-                  }}
-                />
-              </article>
-            ))}
-          </div>
-          <div className="mt-2 flex items-center justify-center gap-[22px]">
-            <button
-              type="button"
-              onClick={() => go(-1)}
-              aria-label="Previous project"
-              className="flex h-[46px] w-[46px] items-center justify-center rounded-full border border-line bg-white text-[17px] text-ink transition-[background-color,color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white"
-            >
-              ←
-            </button>
-            <span className="font-mono text-[12px] tracking-[0.1em] text-ink-2">
-              <b className="font-medium text-ink">
-                {String(active + 1).padStart(2, "0")}
-              </b>{" "}
-              / {String(N).padStart(2, "0")}
-            </span>
-            <button
-              type="button"
-              onClick={() => go(1)}
-              aria-label="Next project"
-              className="flex h-[46px] w-[46px] items-center justify-center rounded-full border border-line bg-white text-[17px] text-ink transition-[background-color,color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white"
-            >
-              →
-            </button>
-          </div>
-        </Reveal>
+
+        <div className="mt-11 flex flex-col gap-5">
+          {PROJECTS.map((p) => (
+            <Reveal key={p.title}>
+              <ProjectTile project={p} />
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
