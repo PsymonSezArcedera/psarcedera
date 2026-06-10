@@ -63,8 +63,8 @@ export function Navbar() {
             key={link.href}
             href={link.href}
             className={cn(
-              "group relative py-0.5 text-[13.5px] transition-colors duration-200",
-              dark ? "text-white/65 hover:text-white" : "text-ink-2 hover:text-ink"
+              "group relative py-0.5 text-[14px] font-semibold transition-colors duration-200",
+              dark ? "text-white hover:text-white" : "text-ink hover:text-ink"
             )}
           >
             {link.label}
@@ -82,7 +82,7 @@ export function Navbar() {
       <Link
         href="#contact"
         className={cn(
-          "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
+          "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-semibold transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
           dark ? "bg-white text-ink" : "bg-ink text-white"
         )}
       >
