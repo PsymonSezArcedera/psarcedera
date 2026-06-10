@@ -156,9 +156,9 @@ export function Hero() {
         <div className="mt-[46px] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-10">
           <div>
             <h1 className="text-[clamp(60px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
-              Psymon
+              Psymon <span className="text-hero-dim">Sez</span>
               <br />
-              <span className="text-hero-dim">Sez Arcedera</span>
+              <span className="text-hero-dim">Arcedera</span>
             </h1>
             <p className="mt-[34px] max-w-[440px] text-[17px] leading-[1.6] text-[#a9a9b0]">
               A full-stack developer building AI-powered products and
