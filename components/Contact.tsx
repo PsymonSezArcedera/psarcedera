@@ -133,13 +133,8 @@ export function Contact() {
                 className="pointer-events-none absolute left-[-60%] top-0 z-[1] h-full w-[50%] -skew-x-[18deg] bg-gradient-to-r from-transparent via-white/15 to-transparent group-hover/btn:animate-[sheen_1.1s_ease_forwards]"
                 aria-hidden
               />
-              <span className="relative z-[2] flex flex-col gap-1">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-hero-dim">
-                  PDF · 1 page
-                </span>
-                <span className="text-[19px] font-semibold tracking-[-0.01em]">
-                  Download my résumé
-                </span>
+              <span className="relative z-[2] text-[19px] font-semibold tracking-[-0.01em]">
+                Download my résumé
               </span>
               <span className="relative z-[2] flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-white text-ink">
                 <DownloadIcon />
