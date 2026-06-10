@@ -45,12 +45,12 @@ export function Navbar() {
     >
       <Link
         href="#top"
-        style={{ color: dark ? "#ffffff" : "#0d0d10" }}
-        className="flex items-center gap-2 text-base font-bold tracking-[-0.02em] transition-colors duration-500"
+        className={cn(
+          "flex items-center gap-2 text-base font-bold tracking-[-0.02em] transition-colors duration-500",
+          dark ? "text-white" : "text-ink"
+        )}
       >
-        <span
-          className="rounded-[9px] border border-dashed border-current px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] opacity-80"
-        >
+        <span className="rounded-[9px] border border-dashed border-current px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] opacity-80">
           PSA
         </span>
       </Link>
@@ -60,13 +60,17 @@ export function Navbar() {
           <Link
             key={link.href}
             href={link.href}
-            style={{ color: dark ? "#ffffff" : "#0d0d10" }}
-            className="group relative py-0.5 text-[14px] font-bold transition-colors duration-200"
+            className={cn(
+              "group relative py-0.5 text-[14px] font-bold transition-colors duration-200",
+              dark ? "text-white" : "text-ink"
+            )}
           >
             {link.label}
             <span
-              style={{ backgroundColor: dark ? "#ffffff" : "#0d0d10" }}
-              className="absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100"
+              className={cn(
+                "absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100",
+                dark ? "bg-white" : "bg-ink"
+              )}
             />
           </Link>
         ))}
@@ -74,11 +78,10 @@ export function Navbar() {
 
       <Link
         href="#contact"
-        style={{
-          backgroundColor: dark ? "#ffffff" : "#0d0d10",
-          color: dark ? "#0d0d10" : "#ffffff",
-        }}
-        className="group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-bold transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90"
+        className={cn(
+          "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-bold transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
+          dark ? "bg-white text-ink" : "bg-ink text-white"
+        )}
       >
         Get in touch
         <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
