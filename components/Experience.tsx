@@ -1,9 +1,10 @@
+import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { cn } from "@/lib/utils";
 
 type Job = {
-  logo: string;
+  logo: { src: string; alt: string };
   role: string;
   company: string;
   date: string;
@@ -14,7 +15,7 @@ type Job = {
 
 const JOBS: Job[] = [
   {
-    logo: "TX",
+    logo: { src: "/ten-x.png", alt: "Ten X Development logo" },
     role: "AI Software Developer Intern",
     company: "Ten X Development",
     date: "Sep 2025 — May 2026",
@@ -23,7 +24,7 @@ const JOBS: Job[] = [
     tags: ["React", "Next.js", "LLM Integration", "Pose Detection"],
   },
   {
-    logo: "DOST",
+    logo: { src: "/dost.png", alt: "DOST logo" },
     role: "Software Developer Intern",
     company: "Department of Science and Technology",
     date: "Jun 2025 — Aug 2025",
@@ -47,8 +48,14 @@ export function Experience() {
           {JOBS.map((job) => (
             <Reveal key={job.company}>
               <article className="group grid grid-cols-[auto_1fr] items-start gap-[30px] rounded-[22px] border border-line-2 bg-white p-7 transition-[transform,box-shadow,border-color] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[#c4c4ca] hover:shadow-[0_30px_60px_-36px_rgba(0,0,0,0.3)] max-[680px]:grid-cols-1 max-[680px]:gap-[18px] max-[680px]:p-6">
-                <div className="flex h-[74px] w-[74px] shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-dashed border-line bg-surface text-[18px] font-semibold tracking-[0.02em] text-ink">
-                  {job.logo}
+                <div className="relative flex h-18.5 w-18.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-line-2 bg-white">
+                  <Image
+                    src={job.logo.src}
+                    alt={job.logo.alt}
+                    fill
+                    sizes="74px"
+                    className="object-contain p-2"
+                  />
                 </div>
                 <div className="exp-main">
                   <div className="flex flex-wrap items-start justify-between gap-5">
