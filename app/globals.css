@@ -13,8 +13,8 @@
   --color-hero-dim: #73737b;
   --color-dot: oklch(0.64 0.13 150);
 
-  --font-sans:
-    "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), "Helvetica Neue", Helvetica, Arial,
+    ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo,
     monospace;
 }
