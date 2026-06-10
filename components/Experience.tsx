@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { TileMark } from "@/components/TileMark";
 import { cn } from "@/lib/utils";
 
 type Job = {
@@ -46,62 +47,63 @@ export function Experience() {
     >
       <div className="wrap">
         <SectionHeader
-          title="Experience"
-          note="Where I've worked and what I shipped."
+          title="Where I've shipped"
+          note="Two roles, two production environments, full feature delivery from idea to ship."
         />
-        <div className="mt-11 flex flex-col gap-4">
+        <div className="mt-11 grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
           {JOBS.map((job) => (
             <Reveal key={job.company}>
-              <article className="group grid grid-cols-[auto_1fr] items-start gap-[30px] rounded-[22px] border border-line-2 bg-white p-7 transition-[transform,box-shadow,border-color] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[#c4c4ca] hover:shadow-[0_30px_60px_-36px_rgba(0,0,0,0.3)] max-[680px]:grid-cols-1 max-[680px]:gap-[18px] max-[680px]:p-6">
-                <div
-                  className={cn(
-                    "relative flex h-18.5 w-18.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-line-2",
-                    job.logo.tileBg ?? "bg-white"
-                  )}
-                >
-                  <Image
-                    src={job.logo.src}
-                    alt={job.logo.alt}
-                    fill
-                    sizes="74px"
-                    className={cn("object-contain", job.logo.pad ?? "p-2")}
-                  />
+              <article className="tile group flex h-full flex-col p-7 max-[680px]:p-6">
+                <header className="flex items-start justify-between gap-4">
+                  <div
+                    className={cn(
+                      "relative flex h-18.5 w-18.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-line-2",
+                      job.logo.tileBg ?? "bg-white"
+                    )}
+                  >
+                    <Image
+                      src={job.logo.src}
+                      alt={job.logo.alt}
+                      fill
+                      sizes="74px"
+                      className={cn("object-contain", job.logo.pad ?? "p-2")}
+                    />
+                  </div>
+                  <span
+                    className={cn(
+                      "tile-meta shrink-0 rounded-full border px-3 py-1.5",
+                      job.current
+                        ? "border-ink bg-ink text-bg"
+                        : "border-line text-ink-2"
+                    )}
+                  >
+                    {job.date}
+                  </span>
+                </header>
+
+                <div className="mt-7">
+                  <h3 className="text-[clamp(22px,2.6vw,28px)] font-semibold leading-tight tracking-[-0.02em]">
+                    {job.role}
+                  </h3>
+                  <div className="mt-1.5 tile-meta">{job.company}</div>
                 </div>
-                <div className="exp-main">
-                  <div className="flex flex-wrap items-start justify-between gap-5">
-                    <div>
-                      <h3 className="text-[clamp(20px,2.3vw,26px)] font-semibold tracking-[-0.02em]">
-                        {job.role}
-                      </h3>
-                      <div className="mt-1 font-mono text-[12px] uppercase tracking-[0.06em] text-ink-2">
-                        {job.company}
-                      </div>
-                    </div>
+
+                <p className="mt-5 text-[15px] leading-[1.65] text-ink-2">
+                  {job.desc}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {job.tags.map((t) => (
                     <span
-                      className={cn(
-                        "whitespace-nowrap rounded-full border px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.05em]",
-                        job.current
-                          ? "border-ink bg-ink text-bg"
-                          : "border-line text-ink-2"
-                      )}
+                      key={t}
+                      className="rounded-full border border-line px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.04em] text-ink-2 transition-colors duration-300 group-hover:border-ink group-hover:text-ink"
                     >
-                      {job.date}
+                      {t}
                     </span>
-                  </div>
-                  <p className="mt-3.5 max-w-[780px] text-[15px] leading-[1.6] text-ink-2">
-                    {job.desc}
-                  </p>
-                  <div className="mt-[18px] flex flex-wrap gap-[7px]">
-                    {job.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-line px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.04em] text-ink-2"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
+
+                <TileMark className="mt-8 h-3.5 w-3.5 self-end text-ink-2 transition-[color,transform] duration-500 group-hover:rotate-45 group-hover:text-ink" />
               </article>
             </Reveal>
           ))}
