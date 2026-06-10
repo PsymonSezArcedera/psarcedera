@@ -9,11 +9,10 @@ export function SectionHeader({
 }) {
   return (
     <>
-      <Reveal className="mb-2 flex items-center gap-[22px]">
-        <h2 className="whitespace-nowrap text-[clamp(26px,3.4vw,42px)] font-semibold tracking-[-0.025em]">
+      <Reveal className="mb-2">
+        <h2 className="text-[clamp(26px,3.4vw,42px)] font-semibold tracking-[-0.025em]">
           {title}
         </h2>
-        <span className="h-px flex-1 bg-line" aria-hidden />
       </Reveal>
       {note && (
         <Reveal
