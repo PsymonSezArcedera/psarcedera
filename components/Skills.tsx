@@ -96,13 +96,10 @@ const GROUPS: Group[] = [
 function GroupTile({ group }: { group: Group }) {
   return (
     <article className="tile group/tile relative flex h-full flex-col p-7 max-[680px]:p-6">
-      <header className="flex items-baseline justify-between gap-3">
+      <header>
         <h3 className="text-[clamp(22px,2.4vw,28px)] font-semibold leading-tight tracking-[-0.025em]">
           {group.name}
         </h3>
-        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
-          /{String(group.items.length).padStart(2, "0")}
-        </span>
       </header>
 
       <ul className="mt-8 grid grid-cols-3 gap-x-3 gap-y-5">
