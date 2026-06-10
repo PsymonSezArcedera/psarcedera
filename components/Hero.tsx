@@ -156,7 +156,7 @@ export function Hero() {
         <div className="mt-[46px] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-10">
           <div>
             <h1 className="text-[clamp(60px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
-              Psymon <span className="text-hero-dim">Sez</span>
+              Psymon Sez
               <br />
               <span className="text-hero-dim">Arcedera</span>
             </h1>
