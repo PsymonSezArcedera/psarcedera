@@ -214,7 +214,10 @@ export function Projects() {
   }, [go]);
 
   return (
-    <section id="work" className="sec-pad border-t border-line bg-band-alt">
+    <section
+      id="work"
+      className="sec-pad relative overflow-x-hidden border-t border-line bg-band-alt"
+    >
       <div className="wrap">
         <SectionHeader
           title="Selected Work"
