@@ -1,74 +1,133 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import type { ComponentType, SVGProps } from "react";
+import {
+  SiPython,
+  SiJavascript,
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiExpress,
+  SiLaravel,
+  SiPostgresql,
+  SiMongodb,
+  SiMysql,
+  SiDocker,
+  SiGit,
+  SiVercel,
+  SiRailway,
+  SiOpenai,
+} from "react-icons/si";
+import {
+  FaJava,
+  FaServer,
+  FaBrain,
+  FaPersonWalking,
+  FaArrowsRotate,
+  FaCheckDouble,
+  FaListCheck,
+} from "react-icons/fa6";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
-import { cn } from "@/lib/utils";
+import { TileMark } from "@/components/TileMark";
 
-type Cat = "all" | "lang" | "frame" | "db" | "tools" | "ai" | "methods";
+type IconCmp = ComponentType<SVGProps<SVGSVGElement>>;
 
-const FILTERS: { cat: Cat; label: string }[] = [
-  { cat: "all", label: "All" },
-  { cat: "lang", label: "Languages" },
-  { cat: "frame", label: "Frameworks" },
-  { cat: "db", label: "Databases" },
-  { cat: "tools", label: "Tools" },
-  { cat: "ai", label: "AI" },
-  { cat: "methods", label: "Methods" },
-];
-
-const FILTER_LABELS: Record<Cat, string> = {
-  all: "all",
-  lang: "languages",
-  frame: "frameworks",
-  db: "databases",
-  tools: "tools",
-  ai: "ai",
-  methods: "methods",
+type Group = {
+  name: string;
+  items: { name: string; Icon: IconCmp }[];
 };
 
-type Chip = { name: string; cat: Exclude<Cat, "all">; size: "sm" | "md" | "lg" | "xl" };
-
-const SIZE_CLASS: Record<Chip["size"], string> = {
-  sm: "text-[15px]",
-  md: "text-[21px]",
-  lg: "text-[29px] max-[680px]:text-[24px]",
-  xl: "text-[40px] max-[680px]:text-[30px]",
-};
-
-const CHIPS: Chip[] = [
-  { name: "Python", cat: "lang", size: "xl" },
-  { name: "JavaScript", cat: "lang", size: "xl" },
-  { name: "Java", cat: "lang", size: "lg" },
-  { name: "React", cat: "frame", size: "xl" },
-  { name: "Next.js", cat: "frame", size: "lg" },
-  { name: "Tailwind CSS", cat: "frame", size: "lg" },
-  { name: "Laravel", cat: "frame", size: "md" },
-  { name: "Express.js", cat: "frame", size: "md" },
-  { name: "PostgreSQL", cat: "db", size: "lg" },
-  { name: "MongoDB", cat: "db", size: "md" },
-  { name: "MySQL", cat: "db", size: "md" },
-  { name: "REST APIs", cat: "tools", size: "lg" },
-  { name: "Docker", cat: "tools", size: "md" },
-  { name: "Git", cat: "tools", size: "md" },
-  { name: "Vercel", cat: "tools", size: "md" },
-  { name: "Railway", cat: "tools", size: "sm" },
-  { name: "LLM Integration", cat: "ai", size: "lg" },
-  { name: "Prompt Engineering", cat: "ai", size: "lg" },
-  { name: "Pose Detection", cat: "ai", size: "md" },
-  { name: "Agile", cat: "methods", size: "md" },
-  { name: "Test Automation", cat: "methods", size: "sm" },
-  { name: "SDLC", cat: "methods", size: "sm" },
+const GROUPS: Group[] = [
+  {
+    name: "Languages",
+    items: [
+      { name: "Python", Icon: SiPython },
+      { name: "JavaScript", Icon: SiJavascript },
+      { name: "Java", Icon: FaJava },
+    ],
+  },
+  {
+    name: "Frameworks",
+    items: [
+      { name: "React", Icon: SiReact },
+      { name: "Next.js", Icon: SiNextdotjs },
+      { name: "Tailwind CSS", Icon: SiTailwindcss },
+      { name: "Express.js", Icon: SiExpress },
+      { name: "Laravel", Icon: SiLaravel },
+    ],
+  },
+  {
+    name: "Databases",
+    items: [
+      { name: "PostgreSQL", Icon: SiPostgresql },
+      { name: "MongoDB", Icon: SiMongodb },
+      { name: "MySQL", Icon: SiMysql },
+    ],
+  },
+  {
+    name: "Tools",
+    items: [
+      { name: "REST APIs", Icon: FaServer },
+      { name: "Docker", Icon: SiDocker },
+      { name: "Git", Icon: SiGit },
+      { name: "Vercel", Icon: SiVercel },
+      { name: "Railway", Icon: SiRailway },
+    ],
+  },
+  {
+    name: "AI",
+    items: [
+      { name: "LLM Integration", Icon: SiOpenai },
+      { name: "Prompt Engineering", Icon: FaBrain },
+      { name: "Pose Detection", Icon: FaPersonWalking },
+    ],
+  },
+  {
+    name: "Methods",
+    items: [
+      { name: "Agile", Icon: FaArrowsRotate },
+      { name: "Test Automation", Icon: FaCheckDouble },
+      { name: "SDLC", Icon: FaListCheck },
+    ],
+  },
 ];
+
+function GroupTile({ group }: { group: Group }) {
+  return (
+    <article className="tile group/tile relative flex h-full flex-col p-7 max-[680px]:p-6">
+      <header className="flex items-baseline justify-between gap-3">
+        <h3 className="text-[clamp(22px,2.4vw,28px)] font-semibold leading-tight tracking-[-0.025em]">
+          {group.name}
+        </h3>
+        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
+          /{String(group.items.length).padStart(2, "0")}
+        </span>
+      </header>
+
+      <ul className="mt-8 grid grid-cols-3 gap-x-3 gap-y-5">
+        {group.items.map(({ name, Icon }) => (
+          <li
+            key={name}
+            className="group/chip flex flex-col items-center gap-2 rounded-xl border border-transparent p-3 transition-[transform,background-color,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-line-2 hover:bg-bg/60"
+          >
+            <Icon
+              className="h-7 w-7 text-ink transition-colors duration-300"
+              aria-hidden
+            />
+            <span className="text-center text-[12px] font-medium leading-tight tracking-[-0.01em] text-ink-2 transition-colors duration-300 group-hover/chip:text-ink">
+              {name}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <TileMark className="mt-6 h-3.5 w-3.5 self-end text-ink-2 transition-[color,transform] duration-500 group-hover/tile:rotate-45 group-hover/tile:text-ink" />
+    </article>
+  );
+}
 
 export function Skills() {
-  const [active, setActive] = useState<Cat>("all");
-
-  const visibleCount = useMemo(() => {
-    if (active === "all") return CHIPS.length;
-    return CHIPS.filter((c) => c.cat === active).length;
-  }, [active]);
-
   return (
     <section
       id="skills"
@@ -77,51 +136,16 @@ export function Skills() {
       <div className="wrap">
         <SectionHeader
           title="Skills"
-          note="A field of the tools and disciplines I work with — filter by category, hover to focus."
+          note="Six groups of tools. Hover an icon to name it."
         />
 
-        <Reveal className="mt-[38px] flex flex-wrap gap-2.5">
-          {FILTERS.map((f) => (
-            <button
-              key={f.cat}
-              type="button"
-              onClick={() => setActive(f.cat)}
-              className={cn(
-                "rounded-full border px-4 py-2 font-mono text-[12px] uppercase tracking-[0.06em] transition-[background-color,color,border-color] duration-200",
-                active === f.cat
-                  ? "border-ink bg-ink text-bg"
-                  : "border-line text-ink-2 hover:border-ink hover:text-ink"
-              )}
-            >
-              {f.label}
-            </button>
+        <div className="mt-11 grid grid-cols-3 gap-5 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          {GROUPS.map((g) => (
+            <Reveal key={g.name}>
+              <GroupTile group={g} />
+            </Reveal>
           ))}
-        </Reveal>
-
-        <Reveal className="mt-[34px] flex max-w-[1060px] flex-wrap items-baseline gap-x-3.5 gap-y-3">
-          {CHIPS.map((c) => {
-            const on = active === "all" || c.cat === active;
-            return (
-              <span
-                key={c.name}
-                className={cn(
-                  "inline-flex cursor-default items-center rounded-[46px] border border-line px-[0.82em] py-[0.5em] font-medium leading-none tracking-[-0.02em] text-ink transition-[transform,background-color,color,border-color,opacity,filter] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:scale-105 hover:border-ink hover:bg-ink hover:text-bg",
-                  SIZE_CLASS[c.size],
-                  !on &&
-                    "scale-[0.97] opacity-20 grayscale hover:scale-[0.97] hover:translate-y-0 hover:border-line hover:bg-transparent hover:text-ink"
-                )}
-              >
-                {c.name}
-              </span>
-            );
-          })}
-        </Reveal>
-
-        <Reveal className="mt-9 border-t border-line pt-5 font-mono text-[12px] uppercase tracking-[0.08em] text-ink-2">
-          <b className="font-medium text-ink">{visibleCount}</b> tools &
-          disciplines · showing{" "}
-          <b className="font-medium text-ink">{FILTER_LABELS[active]}</b>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
