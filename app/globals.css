@@ -85,18 +85,17 @@
   .tile {
     position: relative;
     border-radius: 24px;
-    border: 1px solid var(--color-line-2);
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.45);
     overflow: hidden;
     transition:
-      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.45s,
-      border-color 0.3s;
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.4s,
+      box-shadow 0.45s;
   }
   .tile:hover {
     transform: translateY(-4px);
-    box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.28);
-    border-color: #c4c4ca;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 28px 56px -34px rgba(0, 0, 0, 0.22);
   }
   .tile-meta {
     font-family: var(--font-mono);
