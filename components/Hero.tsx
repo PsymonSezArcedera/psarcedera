@@ -152,7 +152,7 @@ export function Hero() {
       id="top"
       className="bg-hero pb-24 pt-[152px] text-white"
     >
-      <div className="wrap">
+      <div className="mx-auto max-w-[1840px] px-14 max-[1024px]:px-10 max-[680px]:px-5">
         <div className="mt-[46px] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-10">
           <div>
             <h1 className="text-[clamp(60px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
