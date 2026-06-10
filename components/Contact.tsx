@@ -136,7 +136,7 @@ export function Contact() {
               <span className="relative z-[2] text-[19px] font-semibold tracking-[-0.01em]">
                 Download my résumé
               </span>
-              <span className="relative z-[2] flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-white text-ink">
+              <span className="relative z-2 flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-full bg-white text-ink">
                 <DownloadIcon />
               </span>
             </Link>
