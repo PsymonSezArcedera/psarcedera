@@ -81,6 +81,30 @@
   .sec-pad {
     padding-block: clamp(60px, 10vw, 104px);
   }
+
+  .tile {
+    position: relative;
+    border-radius: 24px;
+    border: 1px solid var(--color-line-2);
+    background: #ffffff;
+    overflow: hidden;
+    transition:
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.45s,
+      border-color 0.3s;
+  }
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.28);
+    border-color: #c4c4ca;
+  }
+  .tile-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+  }
 }
 
 @keyframes ping-dot {
