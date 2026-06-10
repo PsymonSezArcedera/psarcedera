@@ -44,10 +44,7 @@ function Flashlight() {
   }, []);
 
   return (
-    <div
-      ref={wrapRef}
-      className="wrap relative cursor-crosshair pb-7 pt-1.5 max-[hover:none]:cursor-default"
-    >
+    <div ref={wrapRef} className="wrap flash-wrap relative pb-7 pt-1.5">
       <div className="mb-1.5 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-hero-dim opacity-70">
         — move your cursor —
       </div>
@@ -58,16 +55,7 @@ function Flashlight() {
         <span
           ref={brightRef}
           aria-hidden
-          className="pointer-events-none absolute inset-0 block select-none text-center text-[clamp(64px,21vw,310px)] font-bold uppercase leading-[0.86] tracking-[-0.045em] text-white"
-          style={
-            {
-              textShadow: "0 0 40px rgba(255,255,255,0.35)",
-              WebkitMaskImage:
-                "radial-gradient(circle 160px at var(--mx,-999px) var(--my,-999px),#000 0%,rgba(0,0,0,0.55) 58%,transparent 78%)",
-              maskImage:
-                "radial-gradient(circle 160px at var(--mx,-999px) var(--my,-999px),#000 0%,rgba(0,0,0,0.55) 58%,transparent 78%)",
-            } as React.CSSProperties
-          }
+          className="flash-bright pointer-events-none absolute inset-0 block select-none text-center text-[clamp(64px,21vw,310px)] font-bold uppercase leading-[0.86] tracking-[-0.045em] text-white"
         >
           PSYMON
         </span>

@@ -113,6 +113,36 @@ a {
   }
 }
 
+.flash-wrap {
+  cursor: crosshair;
+}
+.flash-bright {
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.35);
+  -webkit-mask-image: radial-gradient(
+    circle 160px at var(--mx, -999px) var(--my, -999px),
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 58%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    circle 160px at var(--mx, -999px) var(--my, -999px),
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 58%,
+    transparent 78%
+  );
+}
+@media (hover: none) {
+  .flash-wrap {
+    cursor: default;
+  }
+  .flash-bright {
+    -webkit-mask-image: none;
+    mask-image: none;
+    color: rgba(255, 255, 255, 0.14);
+    text-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

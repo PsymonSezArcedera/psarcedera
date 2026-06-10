@@ -114,7 +114,7 @@ function ProjectCard({
 export function Projects() {
   const [active, setActive] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const N = PROJECTS.length;
 
   const rel = useCallback(
