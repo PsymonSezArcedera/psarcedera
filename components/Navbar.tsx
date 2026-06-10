@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -12,8 +13,62 @@ const NAV_LINKS = [
   { href: "#contact", label: "Contact" },
 ];
 
+function BurgerLines({ open }: { open: boolean }) {
+  const lineBase =
+    "absolute left-0 right-0 top-1/2 h-0.5 rounded bg-current origin-center";
+  const easing = [0.16, 1, 0.3, 1] as const;
+  return (
+    <div className="relative h-5 w-5">
+      <motion.span
+        className={lineBase}
+        animate={open ? { rotate: 45, y: 0 } : { rotate: 0, y: -5 }}
+        transition={{ duration: 0.3, ease: easing }}
+      />
+      <motion.span
+        className={lineBase}
+        animate={open ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      />
+      <motion.span
+        className={lineBase}
+        animate={open ? { rotate: -45, y: 0 } : { rotate: 0, y: 5 }}
+        transition={{ duration: 0.3, ease: easing }}
+      />
+    </div>
+  );
+}
+
 export function Navbar() {
   const [dark, setDark] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 820) setOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     const update = () => {
@@ -33,60 +88,148 @@ export function Navbar() {
     };
   }, []);
 
+  const drawerEase = [0.16, 1, 0.3, 1] as const;
+
   return (
-    <nav
-      className={cn(
-        "fixed top-4 left-6 right-6 z-100 mx-auto flex max-w-325 items-center justify-between gap-5",
-        "rounded-full py-2.5 pl-5 pr-3 backdrop-blur-md backdrop-saturate-150",
-        "shadow-[0_14px_36px_-20px_rgba(0,0,0,0.45)] transition-[background-color,color] duration-500",
-        dark ? "bg-[rgba(13,13,16,0.88)]" : "bg-[rgba(255,255,255,0.82)]",
-        "max-[820px]:left-1/2 max-[820px]:right-auto max-[820px]:-translate-x-1/2 max-[820px]:max-w-[calc(100vw-24px)] max-[820px]:justify-start max-[820px]:gap-3 max-[820px]:py-2 max-[820px]:pl-4 max-[820px]:pr-1.5"
-      )}
-    >
-      <Link
-        href="#top"
-        aria-label="Back to top"
+    <>
+      <nav
         className={cn(
-          "inline-flex items-center text-2xl font-bold leading-none tracking-[-0.04em] transition-colors duration-500",
-          dark ? "text-white" : "text-ink"
+          "fixed top-4 left-6 right-6 z-100 mx-auto flex max-w-325 items-center justify-between gap-5",
+          "rounded-full py-2.5 pl-5 pr-3 backdrop-blur-md backdrop-saturate-150",
+          "shadow-[0_14px_36px_-20px_rgba(0,0,0,0.45)] transition-[background-color,color] duration-500",
+          "max-[820px]:hidden",
+          dark ? "bg-[rgba(13,13,16,0.88)]" : "bg-[rgba(255,255,255,0.82)]"
         )}
       >
-        P
-      </Link>
+        <Link
+          href="#top"
+          aria-label="Back to top"
+          className={cn(
+            "inline-flex items-center text-2xl font-bold leading-none tracking-[-0.04em] transition-colors duration-500",
+            dark ? "text-white" : "text-ink"
+          )}
+        >
+          P
+        </Link>
 
-      <div className="flex gap-7 max-[820px]:hidden">
-        {NAV_LINKS.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={cn(
-              "group relative py-0.5 text-[14px] font-medium transition-colors duration-200",
-              dark ? "text-white" : "text-ink"
-            )}
-          >
-            {link.label}
-            <span
+        <div className="flex gap-7">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
               className={cn(
-                "absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100",
-                dark ? "bg-white" : "bg-ink"
+                "group relative py-0.5 text-[14px] font-medium transition-colors duration-200",
+                dark ? "text-white" : "text-ink"
               )}
-            />
-          </Link>
-        ))}
+            >
+              {link.label}
+              <span
+                className={cn(
+                  "absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100",
+                  dark ? "bg-white" : "bg-ink"
+                )}
+              />
+            </Link>
+          ))}
+        </div>
+
+        <Link
+          href="#contact"
+          className={cn(
+            "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-medium transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
+            dark ? "bg-white text-ink" : "bg-ink text-white"
+          )}
+        >
+          Get in touch
+          <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+            ↗
+          </span>
+        </Link>
+      </nav>
+
+      <div className="fixed top-4 left-4 right-4 z-101 hidden items-center justify-between max-[820px]:flex">
+        <Link
+          href="#top"
+          aria-label="Back to top"
+          className={cn(
+            "inline-flex items-center text-2xl font-bold leading-none tracking-[-0.04em] transition-colors duration-500",
+            open ? "text-white" : dark ? "text-ink" : "text-white"
+          )}
+        >
+          P
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          className={cn(
+            "inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300",
+            open ? "bg-white text-ink" : "bg-ink text-white"
+          )}
+        >
+          <BurgerLines open={open} />
+        </button>
       </div>
 
-      <Link
-        href="#contact"
-        className={cn(
-          "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-medium transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
-          dark ? "bg-white text-ink" : "bg-ink text-white"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-drawer"
+            initial={{ x: "100%" }}
+            animate={{ x: "0%" }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.5, ease: drawerEase }}
+            className="fixed inset-0 z-100 flex flex-col bg-hero text-white max-[820px]:flex"
+          >
+            <div className="flex h-full flex-col px-6 pt-24 pb-8">
+              <nav className="flex flex-col" aria-label="Mobile">
+                {NAV_LINKS.map((link, i) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.2 + i * 0.06,
+                      duration: 0.5,
+                      ease: drawerEase,
+                    }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="block py-3 text-[clamp(36px,9vw,52px)] font-bold leading-tight tracking-[-0.03em] text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55, duration: 0.5, ease: drawerEase }}
+                className="mt-auto flex flex-col gap-4 border-t border-white/10 pt-6"
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-hero-dim">
+                  Reach out
+                </span>
+                <Link
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-[14px] font-medium text-ink"
+                >
+                  Get in touch
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    ↗
+                  </span>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         )}
-      >
-        Get in touch
-        <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-          ↗
-        </span>
-      </Link>
-    </nav>
+      </AnimatePresence>
+    </>
   );
 }
