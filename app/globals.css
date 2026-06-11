@@ -127,7 +127,7 @@
     opacity: 0;
     transition: opacity 0.45s ease;
   }
-  .tile:hover {
+  .tile:is(:hover, .tile-focus) {
     transform: translateY(-4px);
     color: #f2f2f5;
     box-shadow:
@@ -135,7 +135,7 @@
       inset 0 -1px 1px rgba(0, 0, 0, 0.08),
       0 30px 60px -34px rgba(0, 0, 0, 0.45);
   }
-  .tile:hover::before {
+  .tile:is(:hover, .tile-focus)::before {
     opacity: 1;
   }
   .tile-meta {
@@ -319,45 +319,50 @@
   transition-property: color, border-color, background-color;
   transition-duration: 0.45s;
 }
-.tile:hover .text-ink {
+.tile:is(:hover, .tile-focus) .text-ink {
   color: #f5f5f7;
 }
-.tile:hover .text-ink-2 {
+.tile:is(:hover, .tile-focus) .text-ink-2 {
   color: #a6a6af;
 }
-.tile:hover .text-line {
+.tile:is(:hover, .tile-focus) .text-line {
   color: rgba(255, 255, 255, 0.28);
 }
-.tile:hover .text-line-2 {
+.tile:is(:hover, .tile-focus) .text-line-2 {
   color: rgba(255, 255, 255, 0.16);
 }
-.tile:hover .border-line {
+.tile:is(:hover, .tile-focus) .border-line {
   border-color: rgba(255, 255, 255, 0.22);
 }
-.tile:hover .border-line-2 {
+.tile:is(:hover, .tile-focus) .border-line-2 {
   border-color: rgba(255, 255, 255, 0.15);
 }
 /* black date pill (current role) flips to white */
-.tile:hover .bg-ink {
+.tile:is(:hover, .tile-focus) .bg-ink {
   background-color: #f5f5f7;
 }
-.tile:hover .border-ink {
+.tile:is(:hover, .tile-focus) .border-ink {
   border-color: #f5f5f7;
 }
-.tile:hover .text-bg {
+.tile:is(:hover, .tile-focus) .text-bg {
   color: #16161b;
 }
 /* group-hover accents (tag pills, TileMark) brighten instead of inking */
-.tile:hover .group-hover\:text-ink {
+.tile:is(:hover, .tile-focus) .group-hover\:text-ink {
   color: #f5f5f7;
 }
-.tile:hover .group-hover\:border-ink {
+.tile:is(:hover, .tile-focus) .group-hover\:border-ink {
   border-color: rgba(255, 255, 255, 0.5);
 }
 /* skills icon cells: light fill on cell-hover becomes a soft white glaze */
-.tile:hover .hover\:bg-bg\/60:hover {
+.tile:is(:hover, .tile-focus) .hover\:bg-bg\/60:hover {
   background-color: rgba(255, 255, 255, 0.08);
 }
-.tile:hover .hover\:border-line-2:hover {
+.tile:is(:hover, .tile-focus) .hover\:border-line-2:hover {
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* on touch devices, the focused tile also reveals hover-only hints */
+.tile.tile-focus .group-hover\:opacity-100 {
+  opacity: 1;
 }

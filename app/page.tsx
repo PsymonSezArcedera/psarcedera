@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { TileFocusObserver } from "@/components/TileFocusObserver";
 import { Awards } from "@/components/Awards";
 import { Contact } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
@@ -22,6 +23,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <TileFocusObserver />
     </>
   );
 }
