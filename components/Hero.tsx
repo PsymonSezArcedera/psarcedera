@@ -26,8 +26,8 @@ export function Hero() {
       className="bg-hero pt-[clamp(110px,15vw,152px)] pb-[clamp(60px,10vw,96px)] text-white"
     >
       <div className="mx-auto max-w-460 px-14 max-[1024px]:px-10 max-[680px]:px-5">
-        <div className="relative mt-[clamp(28px,4vw,46px)] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1">
-          <div className="relative z-1 max-[920px]:pointer-events-none">
+        <div className="relative mt-[clamp(28px,4vw,46px)] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1 max-[920px]:gap-9">
+          <div className="relative z-1">
             <h1 className="text-[clamp(54px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
               <span className="max-[920px]:hidden">
                 <Typewriter
@@ -54,10 +54,8 @@ export function Hero() {
               government teams.
             </p>
           </div>
-          <div className="mx-auto w-full max-[920px]:absolute max-[920px]:inset-x-0 max-[920px]:top-1/2 max-[920px]:z-0 max-[920px]:flex max-[920px]:-translate-y-1/2 max-[920px]:justify-center max-[920px]:opacity-40">
-            <div className="w-full max-[920px]:max-w-[min(88vw,420px)]">
-              <LogoFrame />
-            </div>
+          <div className="mx-auto w-full max-[920px]:mt-2 max-[920px]:max-w-[min(82vw,400px)]">
+            <LogoFrame />
           </div>
         </div>
       </div>
