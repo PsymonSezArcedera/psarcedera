@@ -269,14 +269,11 @@
   .flash-bright {
     background-image: linear-gradient(
       180deg,
-      #fbfcfd 0%,
-      #d3d7de 30%,
-      #8d93a0 47%,
-      #3a3f4a 50%,
-      #7f8693 53%,
-      #cfd3da 72%,
-      #f2f3f6 88%,
-      #aeb4bf 100%
+      #f8f9fb 0%,
+      #d9dce2 30%,
+      #a8adb8 55%,
+      #e6e8ed 78%,
+      #c2c6cd 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
