@@ -16,7 +16,6 @@ export type ProjectData = {
   longDescription: string[];
   role: string;
   badges: string[];
-  planned?: boolean;
   gradient: string;
   glow: string;
   cover: string;

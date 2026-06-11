@@ -58,7 +58,6 @@ const PROJECTS: ProjectData[] = [
     ],
     role: "Developer",
     badges: ["React Native", "Mobile", "Maps"],
-    planned: true,
     gradient: "linear-gradient(135deg, #8a8e96 0%, #a8acb2 50%, #c4c6cc 100%)",
     glow: "rgba(255,255,255,0.22)",
     cover: "/projects/ParaLink/cover_page.png",
@@ -192,11 +191,6 @@ function ProjectTile({
             background: `radial-gradient(circle 300px at 50% 50%, ${project.glow}, transparent 70%)`,
           }}
         />
-        {project.planned && (
-          <span className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/30 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-white/90 backdrop-blur-md">
-            Planned
-          </span>
-        )}
       </div>
 
       <div className="flex flex-col justify-between p-8 max-[820px]:p-7 max-[680px]:p-6">
