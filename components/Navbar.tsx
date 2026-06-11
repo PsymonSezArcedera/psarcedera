@@ -124,17 +124,34 @@ export function Navbar() {
       <nav
         className={cn(
           "fixed top-4 left-6 right-6 z-100 mx-auto flex max-w-325 items-center justify-between gap-5",
-          "rounded-full py-2.5 pl-5 pr-3 backdrop-blur-md backdrop-saturate-150",
-          "shadow-[0_14px_36px_-20px_rgba(0,0,0,0.45)] transition-[background-color,color] duration-500",
-          "max-[820px]:hidden",
-          dark ? "bg-[rgba(13,13,16,0.88)]" : "bg-[rgba(255,255,255,0.82)]"
+          "rounded-full py-2.5 pl-5 pr-3",
+          "shadow-[0_14px_36px_-20px_rgba(0,0,0,0.45)]",
+          "max-[820px]:hidden"
         )}
       >
-        <Link href="#top" aria-label="Back to top" className="inline-flex items-center">
+        <span
+          aria-hidden
+          className={cn(
+            "metal-silver pointer-events-none absolute inset-0 rounded-full transition-opacity duration-500",
+            dark ? "opacity-0" : "opacity-100"
+          )}
+        />
+        <span
+          aria-hidden
+          className={cn(
+            "metal-gunmetal pointer-events-none absolute inset-0 rounded-full transition-opacity duration-500",
+            dark ? "opacity-100" : "opacity-0"
+          )}
+        />
+        <Link
+          href="#top"
+          aria-label="Back to top"
+          className="relative z-1 inline-flex items-center"
+        >
           <NavLogo showLight={dark} />
         </Link>
 
-        <div className="flex gap-7">
+        <div className="relative z-1 flex gap-7">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -158,7 +175,7 @@ export function Navbar() {
         <Link
           href="#contact"
           className={cn(
-            "group inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-medium transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
+            "group relative z-1 inline-flex items-center gap-2 rounded-full px-4.5 py-2.5 text-[13px] font-medium transition-[background-color,color,transform,opacity] duration-300 hover:-translate-y-px hover:opacity-90",
             dark ? "bg-white text-ink" : "bg-ink text-white"
           )}
         >
