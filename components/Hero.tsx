@@ -10,12 +10,7 @@ const LogoModel = dynamic(
 
 function LogoFrame() {
   return (
-    <div
-      className="group/logo relative aspect-square cursor-grab overflow-hidden rounded-lg active:cursor-grabbing"
-      style={{
-        background: "radial-gradient(circle at 50% 38%, #2b2b33, #121216 70%)",
-      }}
-    >
+    <div className="group/logo relative aspect-square cursor-grab active:cursor-grabbing">
       <LogoModel />
       <div className="pointer-events-none absolute inset-x-0 bottom-3.5 text-center font-mono text-[10.5px] uppercase tracking-[0.16em] text-hero-dim opacity-75 transition-opacity duration-400 group-hover/logo:opacity-0">
         drag to rotate
