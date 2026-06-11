@@ -55,7 +55,7 @@ function Flashlight() {
         <span
           ref={brightRef}
           aria-hidden
-          className="flash-bright pointer-events-none absolute inset-0 block select-none text-center text-[clamp(64px,21vw,310px)] font-bold uppercase leading-[0.86] tracking-[-0.045em] text-white"
+          className="flash-bright pointer-events-none absolute inset-0 block select-none text-center text-[clamp(64px,21vw,310px)] font-bold uppercase leading-[0.86] tracking-[-0.045em]"
         >
           PSYMON
         </span>

@@ -264,10 +264,24 @@
 
 @layer components {
   .flash-wrap {
-    cursor: crosshair;
+    cursor: none;
   }
   .flash-bright {
-    text-shadow: 0 0 40px rgba(255, 255, 255, 0.35);
+    background-image: linear-gradient(
+      180deg,
+      #fbfcfd 0%,
+      #d3d7de 30%,
+      #8d93a0 47%,
+      #3a3f4a 50%,
+      #7f8693 53%,
+      #cfd3da 72%,
+      #f2f3f6 88%,
+      #aeb4bf 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.2));
     -webkit-mask-image: radial-gradient(
       circle 160px at var(--mx, -999px) var(--my, -999px),
       #000 0%,
@@ -288,8 +302,8 @@
     .flash-bright {
       -webkit-mask-image: none;
       mask-image: none;
-      color: rgba(255, 255, 255, 0.14);
-      text-shadow: none;
+      opacity: 0.16;
+      filter: none;
     }
   }
 }
