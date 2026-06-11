@@ -70,6 +70,7 @@ function BurgerLines({ open }: { open: boolean }) {
 export function Navbar() {
   const [dark, setDark] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     if (open) {
@@ -107,6 +108,16 @@ export function Navbar() {
       const overFooter =
         footer != null && window.scrollY + 64 > footer.offsetTop;
       setDark(window.scrollY > heroBottom && !overFooter);
+
+      let current = "";
+      for (const link of NAV_LINKS) {
+        const el = document.getElementById(link.href.slice(1));
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= window.innerHeight * 0.45) {
+          current = link.href;
+        }
+      }
+      setActive(current);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -152,24 +163,37 @@ export function Navbar() {
         </Link>
 
         <div className="relative z-1 flex gap-7">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "group relative py-0.5 text-[14px] font-medium transition-colors duration-200",
-                dark ? "text-white" : "text-ink"
-              )}
-            >
-              {link.label}
-              <span
+          {NAV_LINKS.map((link) => {
+            const isActive = active === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "absolute -bottom-px left-0 h-px w-full origin-right scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100",
-                  dark ? "bg-white" : "bg-ink"
+                  "group relative py-0.5 text-[14px] font-medium transition-colors duration-200",
+                  dark
+                    ? isActive
+                      ? "text-white"
+                      : "text-white/60 hover:text-white"
+                    : isActive
+                      ? "text-ink"
+                      : "text-ink-2 hover:text-ink"
                 )}
-              />
-            </Link>
-          ))}
+              >
+                {link.label}
+                <span
+                  className={cn(
+                    "absolute -bottom-px left-0 h-px w-full transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    isActive
+                      ? "origin-left scale-x-100"
+                      : "origin-right scale-x-0 group-hover:origin-left group-hover:scale-x-100",
+                    dark ? "bg-white" : "bg-ink"
+                  )}
+                />
+              </Link>
+            );
+          })}
         </div>
 
         <Link
