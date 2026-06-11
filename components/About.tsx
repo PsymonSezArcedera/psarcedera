@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Typewriter } from "@/components/SplitText";
 
 const META = [
   { k: "Education", v: "BS Computer Science · UPLB" },
@@ -13,16 +14,25 @@ export function About() {
       <div className="wrap">
         <SectionHeader title="About" />
         <div className="grid grid-cols-[0.8fr_1.2fr] gap-14 max-[860px]:grid-cols-1 max-[860px]:gap-9">
-          <Reveal
-            as="p"
-            className="text-[clamp(24px,3vw,38px)] font-medium leading-[1.22] tracking-[-0.02em]"
-          >
-            Software engineer who turns ideas into shipped products,{" "}
-            <span className="text-ink-2">
-              AI-powered tools and enterprise systems built to last in
-              production.
-            </span>
-          </Reveal>
+          <p className="text-[clamp(24px,3vw,38px)] font-medium leading-[1.22] tracking-[-0.02em]">
+            <Typewriter
+              inline
+              startInView
+              loop
+              charDelayMs={32}
+              pauseBetweenLinesMs={250}
+              startDelayMs={150}
+              lines={[
+                {
+                  text: "Software engineer who turns ideas into shipped products, ",
+                },
+                {
+                  text: "AI-powered tools and enterprise systems built to last in production.",
+                  className: "text-ink-2",
+                },
+              ]}
+            />
+          </p>
 
           <Reveal>
             <p className="mb-4 text-[16px] text-ink-2">
