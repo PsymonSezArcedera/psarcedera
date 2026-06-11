@@ -14,6 +14,10 @@ export function TileFocusObserver() {
     let raf = 0;
     const update = () => {
       raf = 0;
+      if (window.innerWidth > 920) {
+        for (const t of tiles) t.classList.remove("tile-focus");
+        return;
+      }
       const centerY = window.innerHeight / 2;
       let best: HTMLElement | null = null;
       let bestDist = Infinity;
