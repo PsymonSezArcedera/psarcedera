@@ -29,12 +29,23 @@ export function Hero() {
         <div className="relative mt-[clamp(28px,4vw,46px)] grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[920px]:grid-cols-1">
           <div className="relative z-1 max-[920px]:pointer-events-none">
             <h1 className="text-[clamp(54px,9.5vw,140px)] font-bold leading-[0.9] tracking-[-0.045em]">
-              <Typewriter
-                lines={[
-                  { text: "Psymon Sez" },
-                  { text: "Arcedera", className: "text-hero-dim" },
-                ]}
-              />
+              <span className="max-[920px]:hidden">
+                <Typewriter
+                  lines={[
+                    { text: "Psymon Sez" },
+                    { text: "Arcedera", className: "text-hero-dim" },
+                  ]}
+                />
+              </span>
+              <span className="hidden max-[920px]:block">
+                <Typewriter
+                  lines={[
+                    { text: "Psymon" },
+                    { text: "Sez" },
+                    { text: "Arcedera", className: "text-hero-dim" },
+                  ]}
+                />
+              </span>
             </h1>
             <p className="mt-[clamp(20px,3.5vw,34px)] max-w-110 text-[clamp(15px,1.6vw,17px)] leading-[1.6] text-[#a9a9b0]">
               A full-stack developer building AI-powered products and
