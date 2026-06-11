@@ -122,7 +122,7 @@ export function ProjectDetail({
             >
               ←
             </button>
-            <span className="pointer-events-auto rounded-full bg-black/40 px-3.5 py-1.5 font-mono text-[11.5px] tracking-[0.1em] text-white/90 backdrop-blur-md">
+            <span className="pointer-events-auto rounded-full bg-black/40 px-3.5 py-1.5 font-mono text-[11.5px] tracking-widest text-white/90 backdrop-blur-md">
               {String(idx + 1).padStart(2, "0")} /{" "}
               {String(n).padStart(2, "0")}
             </span>
