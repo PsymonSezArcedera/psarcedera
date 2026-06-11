@@ -13,7 +13,11 @@ useGLTF.preload("/logo/logo.glb");
 
 export function LogoModel() {
   return (
-    <Canvas dpr={[1, 2]} camera={{ fov: 45 }}>
+    <Canvas
+      dpr={[1, 2]}
+      camera={{ fov: 45 }}
+      style={{ touchAction: "pan-y" }}
+    >
       <Suspense fallback={null}>
         <Stage
           environment="city"
