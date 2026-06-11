@@ -49,7 +49,7 @@ export function About() {
             <div className="mt-[34px] grid grid-cols-3 gap-x-[26px] gap-y-6 border-t border-line pt-[26px] max-[680px]:grid-cols-1 max-[680px]:gap-y-5">
               {META.map(({ k, v }) => (
                 <div key={k}>
-                  <div className="mb-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-2">
+                  <div className="mb-1 font-mono text-[11px] uppercase tracking-widest text-ink-2">
                     {k}
                   </div>
                   <div className="text-[15px] font-medium leading-snug">
