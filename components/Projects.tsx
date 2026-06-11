@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -195,7 +196,15 @@ function ProjectTile({
 
       <div className="flex flex-col justify-between p-8 max-[820px]:p-7 max-[680px]:p-6">
         <div>
-          <span className="tile-meta">{project.category}</span>
+          <div className="flex items-start justify-between gap-4">
+            <span className="tile-meta">{project.category}</span>
+            <span
+              aria-hidden
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            >
+              <ArrowUpRight className="h-5 w-5" strokeWidth={2.4} />
+            </span>
+          </div>
           <h3 className="mt-3 text-[clamp(26px,3.4vw,40px)] font-semibold leading-[1.05] tracking-tight">
             {project.title}
           </h3>
@@ -215,8 +224,9 @@ function ProjectTile({
             ))}
           </div>
           <div className="mt-6 flex items-center justify-between">
-            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 opacity-0 transition-[opacity,transform] duration-400 group-hover:translate-x-1 group-hover:opacity-100">
-              View project →
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 transition-transform duration-400 group-hover:translate-x-1">
+              View project
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.6} aria-hidden />
             </span>
             <TileMark className="h-3.5 w-3.5 text-ink-2 transition-[color,transform] duration-500 group-hover:rotate-45 group-hover:text-ink" />
           </div>
