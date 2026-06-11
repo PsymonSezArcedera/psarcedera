@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -12,6 +13,34 @@ const NAV_LINKS = [
   { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
+
+function NavLogo({ showLight }: { showLight: boolean }) {
+  return (
+    <span className="relative block h-9 w-9">
+      <Image
+        src="/logo/2d_logo_dark.png"
+        alt="PS logo"
+        fill
+        sizes="36px"
+        className={cn(
+          "object-contain transition-opacity duration-500",
+          showLight ? "opacity-0" : "opacity-100"
+        )}
+      />
+      <Image
+        src="/logo/2d_logo_light.png"
+        alt=""
+        aria-hidden
+        fill
+        sizes="36px"
+        className={cn(
+          "object-contain transition-opacity duration-500",
+          showLight ? "opacity-100" : "opacity-0"
+        )}
+      />
+    </span>
+  );
+}
 
 function BurgerLines({ open }: { open: boolean }) {
   const lineBase =
@@ -101,15 +130,8 @@ export function Navbar() {
           dark ? "bg-[rgba(13,13,16,0.88)]" : "bg-[rgba(255,255,255,0.82)]"
         )}
       >
-        <Link
-          href="#top"
-          aria-label="Back to top"
-          className={cn(
-            "inline-flex items-center text-2xl font-bold leading-none tracking-[-0.04em] transition-colors duration-500",
-            dark ? "text-white" : "text-ink"
-          )}
-        >
-          P
+        <Link href="#top" aria-label="Back to top" className="inline-flex items-center">
+          <NavLogo showLight={dark} />
         </Link>
 
         <div className="flex gap-7">
@@ -148,15 +170,8 @@ export function Navbar() {
       </nav>
 
       <div className="fixed top-4 left-4 right-4 z-101 hidden items-center justify-between max-[820px]:flex">
-        <Link
-          href="#top"
-          aria-label="Back to top"
-          className={cn(
-            "inline-flex items-center text-2xl font-bold leading-none tracking-[-0.04em] transition-colors duration-500",
-            open ? "text-white" : dark ? "text-ink" : "text-white"
-          )}
-        >
-          P
+        <Link href="#top" aria-label="Back to top" className="inline-flex items-center">
+          <NavLogo showLight={open || !dark} />
         </Link>
         <button
           type="button"
