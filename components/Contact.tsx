@@ -127,7 +127,7 @@ export function Contact() {
             <Link
               href="/Psymon-Arcedera-Resume.pdf"
               download
-              className="group/btn relative ml-auto mt-10 flex max-w-107.5 items-center justify-between gap-4 overflow-hidden rounded-[20px] border border-ink bg-ink p-5 pl-6 text-white transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 max-[860px]:ml-0"
+              className="btn-metal group/btn ml-auto mt-10 flex max-w-107.5 items-center justify-between gap-4 overflow-hidden rounded-[20px] p-5 pl-6 hover:-translate-y-1 max-[860px]:ml-0"
             >
               <span
                 className="pointer-events-none absolute left-[-60%] top-0 z-[1] h-full w-[50%] -skew-x-[18deg] bg-gradient-to-r from-transparent via-white/15 to-transparent group-hover/btn:animate-[sheen_1.1s_ease_forwards]"
@@ -136,7 +136,7 @@ export function Contact() {
               <span className="relative z-[2] text-[19px] font-semibold tracking-[-0.01em]">
                 Download my résumé
               </span>
-              <span className="relative z-2 flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-full bg-white text-ink">
+              <span className="relative z-2 flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-full bg-white text-ink transition-colors duration-450 group-hover/btn:bg-ink group-hover/btn:text-white">
                 <DownloadIcon />
               </span>
             </Link>
