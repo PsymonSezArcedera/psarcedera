@@ -25,12 +25,24 @@ function Flashlight() {
     const bright = brightRef.current;
     if (!wrap || !bright) return;
 
-    const onMove = (e: MouseEvent) => {
+    let raf = 0;
+    let lastX = 0;
+    let lastY = 0;
+
+    const paint = () => {
+      raf = 0;
       const r = bright.getBoundingClientRect();
-      bright.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      bright.style.setProperty("--my", `${e.clientY - r.top}px`);
+      bright.style.setProperty("--mx", `${lastX - r.left}px`);
+      bright.style.setProperty("--my", `${lastY - r.top}px`);
+    };
+    const onMove = (e: MouseEvent) => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (!raf) raf = requestAnimationFrame(paint);
     };
     const onLeave = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
       bright.style.setProperty("--mx", "-999px");
       bright.style.setProperty("--my", "-999px");
     };
@@ -38,6 +50,7 @@ function Flashlight() {
     wrap.addEventListener("mousemove", onMove);
     wrap.addEventListener("mouseleave", onLeave);
     return () => {
+      cancelAnimationFrame(raf);
       wrap.removeEventListener("mousemove", onMove);
       wrap.removeEventListener("mouseleave", onLeave);
     };

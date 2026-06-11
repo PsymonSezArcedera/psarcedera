@@ -278,7 +278,6 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.2));
     -webkit-mask-image: radial-gradient(
       circle 160px at var(--mx, -999px) var(--my, -999px),
       #000 0%,
@@ -300,7 +299,6 @@
       -webkit-mask-image: none;
       mask-image: none;
       opacity: 0.16;
-      filter: none;
     }
   }
 }

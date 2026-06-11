@@ -101,7 +101,9 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const update = () => {
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
       const hero = document.getElementById("top");
       const footer = document.getElementById("site-footer");
       const heroBottom = Math.max(120, (hero?.offsetHeight ?? 600) - 86);
@@ -119,12 +121,16 @@ export function Navbar() {
       }
       setActive(current);
     };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(compute);
+    };
+    compute();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
     };
   }, []);
 

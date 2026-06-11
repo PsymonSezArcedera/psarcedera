@@ -111,22 +111,42 @@ function ProjectTile({
   onOpen: () => void;
 }) {
   const ref = useRef<HTMLElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0, mx: 50, my: 50 });
+  const glowRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef(0);
 
+  // direct DOM writes batched to one frame; no React re-render per mousemove
   const onMove = (e: React.MouseEvent) => {
-    const r = ref.current?.getBoundingClientRect();
-    if (!r) return;
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    setTilt({
-      x: py * -3,
-      y: px * 3,
-      mx: ((e.clientX - r.left) / r.width) * 100,
-      my: ((e.clientY - r.top) / r.height) * 100,
+    const { clientX, clientY } = e;
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = 0;
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const px = (clientX - r.left) / r.width - 0.5;
+      const py = (clientY - r.top) / r.height - 0.5;
+      el.style.transform = `perspective(1200px) rotateX(${(py * -3).toFixed(2)}deg) rotateY(${(px * 3).toFixed(2)}deg)`;
+      const glow = glowRef.current;
+      if (glow) {
+        glow.style.background = `radial-gradient(circle 300px at ${((px + 0.5) * 100).toFixed(1)}% ${((py + 0.5) * 100).toFixed(1)}%, ${project.glow}, transparent 70%)`;
+      }
     });
   };
 
-  const onLeave = () => setTilt({ x: 0, y: 0, mx: 50, my: 50 });
+  const onLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    }
+    const el = ref.current;
+    if (el) {
+      el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
+    }
+    const glow = glowRef.current;
+    if (glow) {
+      glow.style.background = `radial-gradient(circle 300px at 50% 50%, ${project.glow}, transparent 70%)`;
+    }
+  };
 
   return (
     <article
@@ -145,7 +165,7 @@ function ProjectTile({
       aria-label={`Open ${project.title} details`}
       className="tile group relative grid cursor-pointer grid-cols-[1fr_1.1fr] overflow-hidden transition-transform duration-300 ease-out max-[820px]:grid-cols-1"
       style={{
-        transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transform: "perspective(1200px) rotateX(0deg) rotateY(0deg)",
         transformStyle: "preserve-3d",
       }}
     >
@@ -165,10 +185,11 @@ function ProjectTile({
           className="absolute inset-0 bg-gradient-to-br from-[rgba(11,11,14,0.38)] via-[rgba(20,20,26,0.18)] to-[rgba(11,11,14,0.32)] transition-opacity duration-500 group-hover:opacity-50"
         />
         <div
+          ref={glowRef}
           aria-hidden
           className="absolute inset-0 transition-opacity duration-500"
           style={{
-            background: `radial-gradient(circle 300px at ${tilt.mx}% ${tilt.my}%, ${project.glow}, transparent 70%)`,
+            background: `radial-gradient(circle 300px at 50% 50%, ${project.glow}, transparent 70%)`,
           }}
         />
         {project.planned && (

@@ -35,6 +35,7 @@ export function Typewriter({
 }) {
   const rootRef = useRef<HTMLSpanElement>(null);
   const inView = useInView(rootRef, { once: true, amount: 0.8 });
+  const visible = useInView(rootRef, { amount: 0.1 });
   const canStart = !startInView || inView;
 
   const [lineIdx, setLineIdx] = useState(0);
@@ -50,7 +51,7 @@ export function Typewriter({
   }, [canStart, startDelayMs]);
 
   useEffect(() => {
-    if (!started || allDone) return;
+    if (!started || allDone || !visible) return;
     const current = lines[lineIdx];
     if (!current) return;
 
@@ -98,6 +99,7 @@ export function Typewriter({
     allDone,
     deleting,
     loop,
+    visible,
     charDelayMs,
     pauseBetweenLinesMs,
     cursorFadeDelayMs,
