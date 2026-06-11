@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -13,6 +14,8 @@ type Project = {
   planned?: boolean;
   gradient: string;
   glow: string;
+  cover: string;
+  coverClass?: string;
 };
 
 const PROJECTS: Project[] = [
@@ -24,6 +27,7 @@ const PROJECTS: Project[] = [
     badges: ["PostgreSQL", "Next.js", "React", "Express"],
     gradient: "linear-gradient(135deg, #1a1a1f 0%, #2b2b33 45%, #3a3a44 100%)",
     glow: "rgba(255,255,255,0.18)",
+    cover: "/projects/ICS-ASTRA/cover_page.png",
   },
   {
     category: "Mobile App · Planned",
@@ -34,6 +38,7 @@ const PROJECTS: Project[] = [
     planned: true,
     gradient: "linear-gradient(135deg, #8a8e96 0%, #a8acb2 50%, #c4c6cc 100%)",
     glow: "rgba(255,255,255,0.22)",
+    cover: "/projects/ParaLink/cover_page.png",
   },
   {
     category: "Research · SSRN · 2024",
@@ -43,6 +48,8 @@ const PROJECTS: Project[] = [
     badges: ["Python", "Naïve Bayes", "Research"],
     gradient: "linear-gradient(135deg, #d4d4d9 0%, #e6e6ea 50%, #f0f0f3 100%)",
     glow: "rgba(13,13,16,0.08)",
+    cover: "/projects/Modeling_Merit/cover_page.png",
+    coverClass: "object-[center_-6px] origin-top scale-105",
   },
 ];
 
@@ -77,9 +84,20 @@ function ProjectTile({ project }: { project: Project }) {
       }}
     >
       <div
-        className="relative min-h-[280px] overflow-hidden max-[820px]:aspect-[16/10] max-[820px]:min-h-0"
+        className="relative min-h-70 overflow-hidden max-[820px]:aspect-16/10 max-[820px]:min-h-0"
         style={{ background: project.gradient }}
       >
+        <Image
+          src={project.cover}
+          alt={`${project.title} cover`}
+          fill
+          sizes="(max-width: 820px) 100vw, 50vw"
+          className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 ${project.coverClass ?? ""}`}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-br from-[rgba(11,11,14,0.38)] via-[rgba(20,20,26,0.18)] to-[rgba(11,11,14,0.32)] transition-opacity duration-500 group-hover:opacity-50"
+        />
         <div
           aria-hidden
           className="absolute inset-0 transition-opacity duration-500"
@@ -87,18 +105,6 @@ function ProjectTile({ project }: { project: Project }) {
             background: `radial-gradient(circle 300px at ${tilt.mx}% ${tilt.my}%, ${project.glow}, transparent 70%)`,
           }}
         />
-        <span
-          aria-hidden
-          className="absolute inset-0 flex select-none items-center justify-center text-[clamp(140px,18vw,260px)] font-bold leading-none tracking-[-0.06em] text-white/10 transition-transform duration-700 group-hover:scale-105"
-          style={{
-            color:
-              project.glow === "rgba(13,13,16,0.08)"
-                ? "rgba(13,13,16,0.12)"
-                : "rgba(255,255,255,0.12)",
-          }}
-        >
-          {project.title.charAt(0)}
-        </span>
         {project.planned && (
           <span className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/30 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-white/90 backdrop-blur-md">
             Planned
@@ -109,7 +115,7 @@ function ProjectTile({ project }: { project: Project }) {
       <div className="flex flex-col justify-between p-8 max-[820px]:p-7 max-[680px]:p-6">
         <div>
           <span className="tile-meta">{project.category}</span>
-          <h3 className="mt-3 text-[clamp(26px,3.4vw,40px)] font-semibold leading-[1.05] tracking-[-0.025em]">
+          <h3 className="mt-3 text-[clamp(26px,3.4vw,40px)] font-semibold leading-[1.05] tracking-tight">
             {project.title}
           </h3>
           <p className="mt-5 text-[16px] leading-[1.65] text-ink-2">
