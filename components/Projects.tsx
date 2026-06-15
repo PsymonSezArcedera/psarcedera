@@ -42,8 +42,10 @@ const PROJECTS: ProjectData[] = [
       { src: "/projects/ICS-ASTRA/10-tech-stack.png", alt: "Tech stack" },
     ],
     links: [
-      // TODO: replace with the actual repo URL
-      { label: "GitHub", href: "https://github.com/PsymonSezArcedera" },
+      {
+        label: "GitHub",
+        href: "https://github.com/fofajardo/cmsc128-ics-astra",
+      },
     ],
   },
   {
@@ -74,7 +76,12 @@ const PROJECTS: ProjectData[] = [
       { src: "/projects/ParaLink/09-proximity.jpg", alt: "Proximity alerts" },
       { src: "/projects/ParaLink/10-start-trip.jpg", alt: "Start trip" },
     ],
-    links: [],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/PsymonSezArcedera/SP-ParaLink",
+      },
+    ],
   },
   {
     slug: "modeling-merit",
