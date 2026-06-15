@@ -85,7 +85,7 @@ export function Experience() {
                   <h3 className="text-[clamp(22px,2.6vw,28px)] font-semibold leading-tight tracking-[-0.02em]">
                     {job.role}
                   </h3>
-                  <div className="mt-1.5 tile-meta">{job.company}</div>
+                  <div className="tile-meta mt-1.5 font-semibold">{job.company}</div>
                 </div>
 
                 <p className="mt-5 text-[15px] leading-[1.65] text-ink-2">
