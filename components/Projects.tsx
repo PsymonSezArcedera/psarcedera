@@ -15,7 +15,7 @@ import {
 const PROJECTS: ProjectData[] = [
   {
     slug: "ics-astra",
-    category: "Web Platform · Backend",
+    category: "Web platform · Information management",
     title: "ICS-ASTRA",
     description:
       "Session-based authentication and role-based access control for an alumni network spanning multiple graduation batches, plus optimized search and filtering over indexed database fields for fast retrieval on large record sets.",
@@ -50,7 +50,7 @@ const PROJECTS: ProjectData[] = [
   },
   {
     slug: "paralink",
-    category: "Mobile App · Planned",
+    category: "Mobile application · Location tracking · Ride-hailing",
     title: "ParaLink",
     description:
       "Real-time routes and trip coordination for jeepney drivers and commuters across the San Pablo transport network. A mobile-first take on local transit.",
@@ -85,7 +85,7 @@ const PROJECTS: ProjectData[] = [
   },
   {
     slug: "modeling-merit",
-    category: "Research · SSRN · 2024",
+    category: "Machine learning · Research",
     title: "Modeling Merit",
     description:
       "End-to-end Naïve Bayes classification pipeline estimating scholarship eligibility from student attributes. Published on SSRN.",
@@ -204,7 +204,7 @@ function ProjectTile({
       <div className="flex flex-col justify-between p-8 max-[820px]:p-7 max-[680px]:p-6">
         <div>
           <div className="flex items-start justify-between gap-4">
-            <span className="tile-meta">{project.category}</span>
+            <span className="tile-meta font-semibold">{project.category}</span>
             <span
               aria-hidden
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
