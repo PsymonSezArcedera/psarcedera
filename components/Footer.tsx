@@ -82,6 +82,10 @@ export function Footer() {
     <footer
       id="site-footer"
       className="relative overflow-hidden bg-hero text-white"
+      style={{
+        backgroundImage:
+          "radial-gradient(ellipse at 50% 0%, rgba(74,127,224,0.08) 0%, transparent 55%), radial-gradient(ellipse at 50% 100%, rgba(10,22,56,0.55) 0%, transparent 60%)",
+      }}
     >
       <div className="wrap grid grid-cols-[1.5fr_1fr_1fr] gap-10 pb-[50px] pt-[84px] max-[760px]:grid-cols-1 max-[760px]:gap-[34px]">
         <div>
