@@ -125,7 +125,7 @@ export function Contact() {
             </div>
 
             <Link
-              href="/Psymon-Arcedera-Resume.pdf"
+              href="/PsymonSezArcedera_Resume.pdf"
               download
               className="btn-metal group/btn ml-auto mt-10 flex max-w-107.5 items-center justify-between gap-4 overflow-hidden rounded-[20px] p-5 pl-6 hover:-translate-y-1 max-[860px]:ml-0"
             >

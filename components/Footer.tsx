@@ -143,7 +143,7 @@ export function Footer() {
               LinkedIn ↗
             </a>
             <Link
-              href="/Psymon-Arcedera-Resume.pdf"
+              href="/PsymonSezArcedera_Resume.pdf"
               download
               className="w-fit text-[15px] text-[#b2b2b9] transition-colors duration-200 hover:text-white"
             >
