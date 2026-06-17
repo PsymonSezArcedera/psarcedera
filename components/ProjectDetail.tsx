@@ -69,6 +69,7 @@ export function ProjectDetail({
       role="dialog"
       aria-modal="true"
       aria-label={`${project.title} details`}
+      data-lenis-prevent
     >
       <div className="mx-auto max-w-325 px-10 pb-20 pt-8 max-[820px]:px-6 max-[680px]:px-5">
         <header className="mb-8 flex items-start justify-between gap-6">
