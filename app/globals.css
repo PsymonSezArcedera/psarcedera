@@ -199,6 +199,34 @@
   }
 
   /* liquid-chrome pill surfaces */
+  .metal-text {
+    background-image: linear-gradient(
+      180deg,
+      #fafbfd 0%,
+      #d4d8df 28%,
+      #a3a9b5 55%,
+      #e7eaef 78%,
+      #b9bec8 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(168, 197, 255, 0.15);
+  }
+  .metal-text-dim {
+    background-image: linear-gradient(
+      180deg,
+      #9aa0ac 0%,
+      #6b7080 30%,
+      #444a59 55%,
+      #7b8090 78%,
+      #5a6072 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .metal-silver {
     background: linear-gradient(
       135deg,

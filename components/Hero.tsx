@@ -34,17 +34,17 @@ export function Hero() {
               <span className="max-[920px]:hidden">
                 <Typewriter
                   lines={[
-                    { text: "Psymon Sez" },
-                    { text: "Arcedera", className: "text-hero-dim" },
+                    { text: "Psymon Sez", className: "metal-text" },
+                    { text: "Arcedera", className: "metal-text-dim" },
                   ]}
                 />
               </span>
               <span className="hidden max-[920px]:block">
                 <Typewriter
                   lines={[
-                    { text: "Psymon" },
-                    { text: "Sez" },
-                    { text: "Arcedera", className: "text-hero-dim" },
+                    { text: "Psymon", className: "metal-text" },
+                    { text: "Sez", className: "metal-text" },
+                    { text: "Arcedera", className: "metal-text-dim" },
                   ]}
                 />
               </span>

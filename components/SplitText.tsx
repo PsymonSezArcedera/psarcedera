@@ -111,22 +111,27 @@ export function Typewriter({
   const rendered = lines.map((line, i) => {
     const isCurrent = i === lineIdx;
     const isPast = i < lineIdx;
+    // Future lines render a non-breaking space so the block reserves its
+    // own line height — keeps subsequent content from jumping down when
+    // the typewriter finally reaches them.
     const visible = isPast
       ? line.text
       : isCurrent
         ? line.text.slice(0, shown)
-        : "";
+        : " ";
     return (
       <span
         key={i}
-        className={`${inline ? "" : "block "}${line.className ?? ""}`}
+        className={`${inline ? "" : "block min-h-[1lh]"}`}
         aria-label={line.text}
       >
-        <span aria-hidden>{visible}</span>
+        <span aria-hidden className={line.className ?? ""}>
+          {visible}
+        </span>
         {isCurrent && started && (
           <motion.span
             aria-hidden
-            className="inline-block"
+            className="inline-block text-white"
             animate={allDone ? { opacity: 0 } : { opacity: [1, 0, 1] }}
             transition={
               allDone
