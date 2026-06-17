@@ -50,10 +50,11 @@ export function Hero() {
               </span>
             </h1>
             <p className="mt-[clamp(20px,3.5vw,34px)] max-w-110 text-[clamp(15px,1.6vw,17px)] leading-[1.6] text-[#a9a9b0]">
-              A full-stack developer building AI-powered products and
-              enterprise systems. CS student at UP Los Baños and DOST-SEI
-              Merit Scholar, with production experience across startup and
-              government teams.
+              Computer Science graduate from the University of the Philippines
+              Los Baños specializing in software engineering, with production
+              experience across startup and government environments. Ships
+              end-to-end features, integrates LLM systems, and collaborates
+              across cross-functional teams.
             </p>
           </div>
           <div className="mx-auto w-full max-[920px]:pointer-events-none max-[920px]:absolute max-[920px]:inset-x-0 max-[920px]:top-1/2 max-[920px]:z-0 max-[920px]:flex max-[920px]:-translate-y-1/2 max-[920px]:justify-center max-[920px]:opacity-40">
