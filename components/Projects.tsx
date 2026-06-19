@@ -21,11 +21,10 @@ const PROJECTS: ProjectData[] = [
       "Session-based authentication and role-based access control for an alumni network spanning multiple graduation batches, plus optimized search and filtering over indexed database fields for fast retrieval on large record sets.",
     longDescription: [
       "ICS-ASTRA (ICS Alumni Synced Tracking for Relations and Advancement) is an alumni platform built for the UPLB Institute of Computer Science, connecting graduates across batches through events, career opportunities, donations, and news.",
-      "I worked as the backend developer: I implemented session-based authentication and role-based access control to deliver personalized access across multiple user roles, and built optimized search and filtering over indexed database fields so alumni and job lookups stay fast on large record sets.",
-      "The platform ships eight core modules: user authentication, profile management, alumni search, event management, career opportunities, donations and sponsorships, a newsletter, and reports with analytics. It runs on Next.js and Node with Supabase, styled with Tailwind, installable as a PWA, with CASL handling authorization, deployed across DigitalOcean and Google Cloud.",
+      "I worked as the backend developer in a cross-functional team of three sub-teams totaling twenty members. I implemented session-based authentication and role-based access control to deliver personalized access across multiple user roles, and built optimized search and filtering over indexed database fields to keep alumni and job lookups fast on large record sets. The platform ships eight core modules: user authentication, profile management, alumni search, event management, career opportunities, donations and sponsorships, a newsletter, and reports with analytics, and runs on Next.js and Node with Supabase, styled with Tailwind, installable as a PWA, with CASL handling authorization, deployed across DigitalOcean and Google Cloud.",
     ],
     role: "Backend Developer",
-    badges: ["PostgreSQL", "Next.js", "React", "Express"],
+    badges: ["Supabase", "Next.js", "Tailwind CSS", "Node.js", "Digital Ocean", "CASL"],
     gradient: "linear-gradient(135deg, #1a1a1f 0%, #2b2b33 45%, #3a3a44 100%)",
     glow: "rgba(255,255,255,0.18)",
     cover: "/projects/ICS-ASTRA/cover_page.png",
@@ -55,12 +54,13 @@ const PROJECTS: ProjectData[] = [
     description:
       "Real-time routes and trip coordination for jeepney drivers and commuters across the San Pablo transport network. A mobile-first take on local transit.",
     longDescription: [
-      "ParaLink connects jeepney drivers and commuters across the San Pablo City transport network: real-time routes, terminals, and trip coordination in a mobile-first app.",
-      "The commuter flow covers the full journey: browse routes and terminals, inspect route details on a live map, check jeepney details and proximity, then start and track a trip. Driver-side coordination and live availability are on the roadmap.",
-      "Currently in development with React Native; the screens here are from the working design build.",
+      "ParaLink is a cross-platform mobile app connecting jeepney commuters and drivers in San Pablo City, featuring real-time route mapping, fare computation, and a live passenger-count system.",
+      "Architected using Firestore data model and Firebase Authentication flow supporting separate commuter and driver roles, with real-time syncing of trip and location data.",
+      "Used integration of Google Maps API and OSRM for route visualization and turn-by-turn pathfinding, delivering accurate jeepney routing across the local transit network.",
+      "The commuter flow covers the full journey: browse routes and terminals, inspect route details on a live map, check jeepney details and proximity, then start and track a trip. Driver-side coordination and live availability are on the roadmap."
     ],
-    role: "Developer",
-    badges: ["React Native", "Mobile", "Maps"],
+    role: "Full Stack Developer",
+    badges: ["React Native", "Expo", "TypeScript", "FireBase", "Google Maps API", "OSRM"],
     gradient: "linear-gradient(135deg, #8a8e96 0%, #a8acb2 50%, #c4c6cc 100%)",
     glow: "rgba(255,255,255,0.22)",
     cover: "/projects/ParaLink/cover_page.png",

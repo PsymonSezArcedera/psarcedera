@@ -16,7 +16,7 @@ const META: Meta[] = [
     v: "University of the Philippines Los Baños",
     sub: "BS Computer Science",
   },
-  { k: "Academics", v: "GWA 1.40 · top 10%" },
+  { k: "Academics", v: "Magna Cum Laude" },
   { k: "Residence", v: "San Pablo, Laguna · PH" },
 ];
 
