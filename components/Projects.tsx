@@ -205,9 +205,11 @@ function ProjectTile({
 
       <div className="flex flex-col justify-between p-8 max-[820px]:p-7 max-[680px]:p-6">
         <div>
-          <div className="flex items-start justify-between gap-4">
-            <span className="tile-meta font-semibold">{project.category}</span>
-            <span className="inline-flex shrink-0 items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+          <div className="flex items-start justify-between gap-4 max-[680px]:flex-col max-[680px]:gap-2.5">
+            <span className="tile-meta font-semibold max-[680px]:order-2">
+              {project.category}
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 max-[680px]:order-1">
               View project
               <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.6} aria-hidden />
             </span>
