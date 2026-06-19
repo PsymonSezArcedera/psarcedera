@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { HeroBackground } from "@/components/HeroBackground";
 import {
   SiSupabase,
   SiNextdotjs,
@@ -144,13 +145,17 @@ export function ProjectDetail({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 28 }}
       transition={{ duration: 0.45, ease: EASE }}
-      className="fixed inset-0 z-110 overflow-y-auto bg-hero text-white"
+      className="fixed inset-0 z-110 text-white"
       role="dialog"
       aria-modal="true"
       aria-label={`${project.title} details`}
-      data-lenis-prevent
     >
-      <div className="mx-auto max-w-325 px-10 pb-20 pt-8 max-[820px]:px-6 max-[680px]:px-5">
+      <HeroBackground />
+      <div
+        className="absolute inset-0 overflow-y-auto"
+        data-lenis-prevent
+      >
+        <div className="mx-auto max-w-325 px-10 pb-20 pt-8 max-[820px]:px-6 max-[680px]:px-5">
         <header className="mb-8 flex items-start justify-between gap-6">
           <div>
             <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-hero-dim">
@@ -332,6 +337,7 @@ export function ProjectDetail({
               </div>
             )}
           </aside>
+        </div>
         </div>
       </div>
     </motion.div>
