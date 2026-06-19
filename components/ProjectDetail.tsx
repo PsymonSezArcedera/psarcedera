@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HeroBackground } from "@/components/HeroBackground";
@@ -163,9 +163,9 @@ export function ProjectDetail({
             aria-label="Back to projects"
             className="btn-metal group/back flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:-translate-y-0.5"
           >
-            <ArrowLeft
-              className="h-5 w-5 transition-transform duration-300 group-hover/back:-translate-x-0.5"
-              strokeWidth={2.4}
+            <ChevronLeft
+              className="h-6 w-6 transition-transform duration-300 group-hover/back:-translate-x-0.5"
+              strokeWidth={2.6}
               aria-hidden
             />
           </button>
@@ -230,7 +230,7 @@ export function ProjectDetail({
               aria-label="Previous image"
               className="btn-metal pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full hover:-translate-y-0.5"
             >
-              <ArrowLeft className="h-5 w-5" strokeWidth={2.6} aria-hidden />
+              <ChevronLeft className="h-6 w-6" strokeWidth={2.8} aria-hidden />
             </button>
             <span className="pointer-events-auto rounded-full bg-black/40 px-3.5 py-1.5 font-mono text-[11.5px] tracking-widest text-white/90 backdrop-blur-md">
               {String(idx + 1).padStart(2, "0")} /{" "}
@@ -242,7 +242,7 @@ export function ProjectDetail({
               aria-label="Next image"
               className="btn-metal pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full hover:-translate-y-0.5"
             >
-              <ArrowRight className="h-5 w-5" strokeWidth={2.6} aria-hidden />
+              <ChevronRight className="h-6 w-6" strokeWidth={2.8} aria-hidden />
             </button>
           </div>
         </div>
