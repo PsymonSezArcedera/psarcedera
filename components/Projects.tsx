@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -207,11 +207,9 @@ function ProjectTile({
         <div>
           <div className="flex items-start justify-between gap-4">
             <span className="tile-meta font-semibold">{project.category}</span>
-            <span
-              aria-hidden
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            >
-              <ArrowUpRight className="h-5 w-5" strokeWidth={2.4} />
+            <span className="inline-flex shrink-0 items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              View project
+              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.6} aria-hidden />
             </span>
           </div>
           <h3 className="mt-3 text-[clamp(26px,3.4vw,40px)] font-semibold leading-[1.05] tracking-tight">
@@ -236,11 +234,7 @@ function ProjectTile({
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 transition-transform duration-400 group-hover:translate-x-1">
-              View project
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.6} aria-hidden />
-            </span>
+          <div className="mt-6 flex items-center justify-end">
             <TileMark className="h-3.5 w-3.5 text-ink-2 transition-[color,transform] duration-500 group-hover:rotate-45 group-hover:text-ink" />
           </div>
         </div>
