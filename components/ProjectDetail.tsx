@@ -186,7 +186,7 @@ export function ProjectDetail({
             className={cn(
               "relative",
               portrait
-                ? "aspect-[9/19.5]"
+                ? "aspect-9/19.5"
                 : "h-[62vh] min-h-80"
             )}
           >
