@@ -2,8 +2,22 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
-import { TileMark } from "@/components/TileMark";
+import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  SiSupabase,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiDigitalocean,
+  SiExpo,
+  SiTypescript,
+  SiFirebase,
+  SiGooglemaps,
+  SiReact,
+  SiPython,
+} from "react-icons/si";
 import { cn } from "@/lib/utils";
 
 export type ProjectLink = { label: string; href: string };
@@ -25,6 +39,32 @@ export type ProjectData = {
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+type IconCmp = ComponentType<SVGProps<SVGSVGElement>>;
+
+const STACK_ICONS: Record<string, IconCmp> = {
+  supabase: SiSupabase,
+  "next.js": SiNextdotjs,
+  nextjs: SiNextdotjs,
+  "tailwind css": SiTailwindcss,
+  tailwind: SiTailwindcss,
+  "node.js": SiNodedotjs,
+  nodejs: SiNodedotjs,
+  "digital ocean": SiDigitalocean,
+  digitalocean: SiDigitalocean,
+  expo: SiExpo,
+  typescript: SiTypescript,
+  firebase: SiFirebase,
+  "google maps api": SiGooglemaps,
+  "google maps": SiGooglemaps,
+  "react native": SiReact,
+  react: SiReact,
+  python: SiPython,
+};
+
+function badgeIcon(name: string): IconCmp | undefined {
+  return STACK_ICONS[name.trim().toLowerCase()];
+}
 
 export function ProjectDetail({
   project,
@@ -57,6 +97,42 @@ export function ProjectDetail({
     return () => window.removeEventListener("keydown", onKey);
   }, [go, onClose]);
 
+  // Swipe to navigate (touch / pen). Vertical motion is left to scroll.
+  const stageRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    let active = false;
+    let sx = 0;
+    let sy = 0;
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") return;
+      active = true;
+      sx = e.clientX;
+      sy = e.clientY;
+    };
+    const onUp = (e: PointerEvent) => {
+      if (!active) return;
+      active = false;
+      const dx = e.clientX - sx;
+      const dy = e.clientY - sy;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        go(dx < 0 ? 1 : -1);
+      }
+    };
+    const onCancel = () => {
+      active = false;
+    };
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onCancel);
+    return () => {
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointercancel", onCancel);
+    };
+  }, [go]);
+
   const current = project.images[idx];
 
   return (
@@ -85,13 +161,16 @@ export function ProjectDetail({
             type="button"
             onClick={onClose}
             aria-label="Close project details"
-            className="btn-metal flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[18px] leading-none hover:-translate-y-0.5"
+            className="btn-metal flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:-translate-y-0.5"
           >
-            ✕
+            <X className="h-5 w-5" strokeWidth={2.4} aria-hidden />
           </button>
         </header>
 
-        <div className="relative overflow-hidden rounded-3xl bg-hero-2">
+        <div
+          ref={stageRef}
+          className="relative overflow-hidden rounded-3xl bg-hero-2 touch-pan-y select-none"
+        >
           <div className="relative h-[62vh] min-h-80">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
@@ -108,6 +187,7 @@ export function ProjectDetail({
                   fill
                   sizes="(max-width: 820px) 100vw, 1200px"
                   className="object-contain p-4 max-[680px]:p-2"
+                  draggable={false}
                   priority
                 />
               </motion.div>
@@ -119,9 +199,9 @@ export function ProjectDetail({
               type="button"
               onClick={() => go(-1)}
               aria-label="Previous image"
-              className="btn-metal pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full text-[16px] hover:-translate-y-0.5"
+              className="btn-metal pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full hover:-translate-y-0.5"
             >
-              ←
+              <ArrowLeft className="h-5 w-5" strokeWidth={2.6} aria-hidden />
             </button>
             <span className="pointer-events-auto rounded-full bg-black/40 px-3.5 py-1.5 font-mono text-[11.5px] tracking-widest text-white/90 backdrop-blur-md">
               {String(idx + 1).padStart(2, "0")} /{" "}
@@ -131,9 +211,9 @@ export function ProjectDetail({
               type="button"
               onClick={() => go(1)}
               aria-label="Next image"
-              className="btn-metal pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full text-[16px] hover:-translate-y-0.5"
+              className="btn-metal pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full hover:-translate-y-0.5"
             >
-              →
+              <ArrowRight className="h-5 w-5" strokeWidth={2.6} aria-hidden />
             </button>
           </div>
         </div>
@@ -187,14 +267,18 @@ export function ProjectDetail({
                 Stack
               </div>
               <div className="flex flex-wrap gap-2">
-                {project.badges.map((b) => (
-                  <span
-                    key={b}
-                    className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.04em] text-white/75"
-                  >
-                    {b}
-                  </span>
-                ))}
+                {project.badges.map((b) => {
+                  const Icon = badgeIcon(b);
+                  return (
+                    <span
+                      key={b}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/4 px-3.5 py-1.5 text-[12.5px] font-medium tracking-[-0.005em] text-white/90"
+                    >
+                      {Icon && <Icon className="h-4 w-4" aria-hidden />}
+                      {b}
+                    </span>
+                  );
+                })}
               </div>
             </div>
             {project.links.length > 0 && (
@@ -212,15 +296,16 @@ export function ProjectDetail({
                       className="btn-metal group/link flex items-center justify-between gap-3 rounded-2xl px-5 py-3.5 text-[14px] font-medium hover:-translate-y-0.5"
                     >
                       {link.label}
-                      <span className="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
-                        ↗
-                      </span>
+                      <ArrowUpRight
+                        className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                        strokeWidth={2.4}
+                        aria-hidden
+                      />
                     </a>
                   ))}
                 </div>
               </div>
             )}
-            <TileMark className="h-3.5 w-3.5 self-end text-hero-dim" />
           </aside>
         </div>
       </div>
