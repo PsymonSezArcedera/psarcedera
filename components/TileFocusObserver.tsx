@@ -11,40 +11,67 @@ export function TileFocusObserver() {
     );
     if (!tiles.length) return;
 
+    // Track which tiles are intersecting; the one whose midpoint is
+    // closest to the viewport centre wins focus. IntersectionObserver
+    // (with multiple thresholds) batches work off the scroll path.
+    const visible = new Set<HTMLElement>();
     let raf = 0;
-    const update = () => {
+    let lastFocus: HTMLElement | null = null;
+
+    const pickFocus = () => {
       raf = 0;
       if (window.innerWidth > 920) {
-        for (const t of tiles) t.classList.remove("tile-focus");
+        if (lastFocus) {
+          lastFocus.classList.remove("tile-focus");
+          lastFocus = null;
+        }
         return;
       }
       const centerY = window.innerHeight / 2;
       let best: HTMLElement | null = null;
       let bestDist = Infinity;
-      for (const t of tiles) {
+      visible.forEach((t) => {
         const r = t.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > window.innerHeight) continue;
         const mid = r.top + r.height / 2;
         const d = Math.abs(mid - centerY);
         if (d < bestDist) {
           bestDist = d;
           best = t;
         }
-      }
-      for (const t of tiles) {
-        t.classList.toggle("tile-focus", t === best);
-      }
+      });
+      if (best === lastFocus) return;
+      if (lastFocus) lastFocus.classList.remove("tile-focus");
+      if (best) (best as HTMLElement).classList.add("tile-focus");
+      lastFocus = best;
     };
     const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+      if (!raf) raf = requestAnimationFrame(pickFocus);
     };
-    update();
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target as HTMLElement);
+          else visible.delete(e.target as HTMLElement);
+        }
+        schedule();
+      },
+      {
+        rootMargin: "-20% 0px -20% 0px",
+        threshold: [0, 0.5, 1],
+      }
+    );
+    tiles.forEach((t) => io.observe(t));
+
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
+
     return () => {
+      io.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
+      if (lastFocus) lastFocus.classList.remove("tile-focus");
     };
   }, []);
 

@@ -82,6 +82,10 @@
 
   .sec-pad {
     padding-block: clamp(60px, 10vw, 104px);
+    /* skip rendering off-screen sections; reserve a rough size so the
+       scrollbar stays accurate */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
   }
 
   .tile {
