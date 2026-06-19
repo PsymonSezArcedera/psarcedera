@@ -65,7 +65,7 @@ const STACK_ICONS: Record<string, IconCmp> = {
   python: SiPython,
 };
 
-function badgeIcon(name: string): IconCmp | undefined {
+export function badgeIcon(name: string): IconCmp | undefined {
   return STACK_ICONS[name.trim().toLowerCase()];
 }
 

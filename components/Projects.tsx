@@ -9,6 +9,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { TileMark } from "@/components/TileMark";
 import {
   ProjectDetail,
+  badgeIcon,
   type ProjectData,
 } from "@/components/ProjectDetail";
 
@@ -18,7 +19,7 @@ const PROJECTS: ProjectData[] = [
     category: "Web platform · Information management",
     title: "ICS-ASTRA",
     description:
-      "Session-based authentication and role-based access control for an alumni network spanning multiple graduation batches, plus optimized search and filtering over indexed database fields for fast retrieval on large record sets.",
+      "ICS-ASTRA is an alumni network platform connecting graduates across multiple batches, with modules for profiles, alumni search, events, career opportunities, donations, and analytics.",
     longDescription: [
       "ICS-ASTRA (ICS Alumni Synced Tracking for Relations and Advancement) is an alumni platform built for the UPLB Institute of Computer Science, connecting graduates across batches through events, career opportunities, donations, and news.",
       "I worked as the backend developer in a cross-functional team of three sub-teams totaling twenty members. I implemented session-based authentication and role-based access control to deliver personalized access across multiple user roles, and built optimized search and filtering over indexed database fields to keep alumni and job lookups fast on large record sets. The platform ships eight core modules: user authentication, profile management, alumni search, event management, career opportunities, donations and sponsorships, a newsletter, and reports with analytics, and runs on Next.js and Node with Supabase, styled with Tailwind, installable as a PWA, with CASL handling authorization, deployed across DigitalOcean and Google Cloud.",
@@ -222,14 +223,18 @@ function ProjectTile({
         </div>
         <div className="mt-8">
           <div className="flex flex-wrap gap-2">
-            {project.badges.map((b) => (
+            {project.badges.map((b) => {
+              const Icon = badgeIcon(b);
+              return (
               <span
                 key={b}
-                className="rounded-full border border-line px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.04em] text-ink-2 transition-colors duration-300 group-hover:border-ink group-hover:text-ink"
+                className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white/30 px-3 py-1.5 text-[12px] font-medium tracking-[-0.005em] text-ink-2 transition-colors duration-300 group-hover:border-ink group-hover:text-ink"
               >
+                {Icon && <Icon className="h-3.5 w-3.5" aria-hidden />}
                 {b}
               </span>
-            ))}
+              );
+            })}
           </div>
           <div className="mt-6 flex items-center justify-between">
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 transition-transform duration-400 group-hover:translate-x-1">
@@ -277,7 +282,7 @@ export function Projects() {
       <div className="wrap">
         <SectionHeader
           title="Selected work"
-          note="Three projects, each given its own room. Click one to open the full story."
+          note="View the projects I have worked on."
         />
 
         <div className="mt-11 flex flex-col gap-5">
