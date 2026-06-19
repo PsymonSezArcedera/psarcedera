@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HeroBackground } from "@/components/HeroBackground";
@@ -156,23 +156,22 @@ export function ProjectDetail({
         data-lenis-prevent
       >
         <div className="mx-auto max-w-325 px-10 pb-20 pt-8 max-[820px]:px-6 max-[680px]:px-5">
-        <header className="mb-8 flex items-start justify-between gap-6">
-          <div>
-            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-hero-dim">
-              {project.category}
-            </span>
-            <h2 className="mt-2 text-[clamp(32px,5vw,56px)] font-bold leading-[1.02] tracking-tight">
-              {project.title}
-            </h2>
-          </div>
+        <header className="mb-8 flex items-center gap-5">
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close project details"
-            className="btn-metal flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:-translate-y-0.5"
+            aria-label="Back to projects"
+            className="btn-metal group/back flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:-translate-y-0.5"
           >
-            <X className="h-5 w-5" strokeWidth={2.4} aria-hidden />
+            <ArrowLeft
+              className="h-5 w-5 transition-transform duration-300 group-hover/back:-translate-x-0.5"
+              strokeWidth={2.4}
+              aria-hidden
+            />
           </button>
+          <h2 className="text-[clamp(32px,5vw,56px)] font-bold leading-[1.02] tracking-tight">
+            {project.title}
+          </h2>
         </header>
 
         <div
