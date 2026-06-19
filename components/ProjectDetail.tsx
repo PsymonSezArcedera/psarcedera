@@ -36,6 +36,8 @@ export type ProjectData = {
   coverClass?: string;
   images: { src: string; alt: string }[];
   links: ProjectLink[];
+  /** Image orientation in the detail carousel; defaults to landscape */
+  imageOrientation?: "landscape" | "portrait";
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -134,6 +136,7 @@ export function ProjectDetail({
   }, [go]);
 
   const current = project.images[idx];
+  const portrait = project.imageOrientation === "portrait";
 
   return (
     <motion.div
@@ -169,9 +172,24 @@ export function ProjectDetail({
 
         <div
           ref={stageRef}
-          className="relative overflow-hidden rounded-3xl bg-hero-2 touch-pan-y select-none"
+          className={cn(
+            "relative overflow-hidden rounded-3xl bg-hero-2 touch-pan-y select-none",
+            portrait && "mx-auto"
+          )}
+          style={
+            portrait
+              ? { width: "min(38vh, 360px, 90vw)" }
+              : undefined
+          }
         >
-          <div className="relative h-[62vh] min-h-80">
+          <div
+            className={cn(
+              "relative",
+              portrait
+                ? "aspect-[9/19.5]"
+                : "h-[62vh] min-h-80"
+            )}
+          >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={idx}
@@ -185,8 +203,15 @@ export function ProjectDetail({
                   src={current.src}
                   alt={current.alt}
                   fill
-                  sizes="(max-width: 820px) 100vw, 1200px"
-                  className="object-contain p-4 max-[680px]:p-2"
+                  sizes={
+                    portrait
+                      ? "(max-width: 680px) 90vw, 360px"
+                      : "(max-width: 820px) 100vw, 1200px"
+                  }
+                  className={cn(
+                    "object-contain",
+                    portrait ? "p-2" : "p-4 max-[680px]:p-2"
+                  )}
                   draggable={false}
                   priority
                 />

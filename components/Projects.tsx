@@ -64,6 +64,7 @@ const PROJECTS: ProjectData[] = [
     gradient: "linear-gradient(135deg, #8a8e96 0%, #a8acb2 50%, #c4c6cc 100%)",
     glow: "rgba(255,255,255,0.22)",
     cover: "/projects/ParaLink/cover_page.png",
+    imageOrientation: "portrait",
     images: [
       { src: "/projects/ParaLink/01-login.jpg", alt: "Login screen" },
       { src: "/projects/ParaLink/02-register.jpg", alt: "Commuter registration" },
